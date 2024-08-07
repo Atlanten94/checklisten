@@ -400,6 +400,8 @@ font-size:40px;
 
 #mindmapContainer {
     display: flex;
+    font-family: "Kalam", cursive;
+    font-style: normal;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
