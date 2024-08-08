@@ -30,19 +30,22 @@ commentForm.addEventListener('submit', (e) => {
   }
 });
 
+function getRandomColor() {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
 function displayComment(commentData) {
   const commentNode = document.createElement('div');
   commentNode.className = 'comment-node';
   commentNode.innerText = commentData.text;
+  commentNode.style.backgroundColor = getRandomColor(); // Zufällige Farbe zuweisen
   mindmapContainer.appendChild(commentNode);
 }
 
 onValue(ref(database, 'comments'), (snapshot) => {
-  mindmapContainer.innerHTML = "";
-  const comments = snapshot.val();
-  if (comments) {
-    Object.keys(comments).forEach((key) => {
-      displayComment(comments[key]);
-    });
-  }
+  mindmapContainer.innerHTML = '';
+  snapshot.forEach((childSnapshot) => {
+    const commentData = childSnapshot.val();
+    displayComment(commentData);
+  });
 });
