@@ -45,9 +45,11 @@ function displayComment(commentData) {
 }
 
 onValue(ref(database, 'comments'), (snapshot) => {
-  mindmapContainer.innerHTML = '';
-  snapshot.forEach((childSnapshot) => {
-    const commentData = childSnapshot.val();
-    displayComment(commentData);
-  });
+  mindmapContainer.innerHTML = "";
+  const comments = snapshot.val();
+  if (comments) {
+    Object.keys(comments).forEach((key) => {
+      displayComment(comments[key]);
+    });
+  }
 });
