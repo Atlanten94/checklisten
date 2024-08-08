@@ -30,6 +30,8 @@ commentForm.addEventListener('submit', (e) => {
   }
 });
 
+const colors = ["#FFB3BA", "#FFDFBA", "#FFFFBA", "#BAFFC9", "#BAE1FF", "#D3A4FF", "#FFCCE5", "#CCE5FF"];
+
 function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
