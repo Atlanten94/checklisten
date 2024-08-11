@@ -62,12 +62,15 @@ border-top: 20px solid #40E0D0;
     
 }
 
-h1, h2, h4 {
+h1, h2 {
     font-family:"Luckiest Guy", cursive;
     text-align: center;
     margin: 15px 0;
 }
 
+h4{
+    text-align: center;
+}
 label {
     display: block;
     margin: 10px 0;
@@ -365,7 +368,7 @@ font-size:40px;
             "top-left top-center top-right"
             "bottom-left bottom bottom-right";
         gap: 0;
-        grid-template-rows: 200px 200px 200px;
+        grid-template-rows: 200px 180px 200px;
         grid-template-columns: 50px 50% 50px;
         margin-top:15%;
         margin:10px;
@@ -420,12 +423,23 @@ font-size:40px;
         margin-right:0;
     }
     .image-link.bottom {
-        transform:translateY(0);
+        transform:translateY(-35px);
     }
 
     .image-link.bottom img{
         width:250px;
         height:190px;
+    }
+
+    @keyframes rollInFromRight {
+        from {
+            transform: translateX(100%) translateY(-35px) rotate(360deg);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0) translateY(-35px) rotate(0);
+            opacity: 1;
+        }
     }
 }
 
@@ -508,4 +522,79 @@ font-size:60px;
   .comment-node:hover {
     background-color: #e0e0e0;
   }
+
+
+
+
+
+/*---------------------F R Ü H D I E N S T-------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.panel-heading {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+.panel-title{
+    display: block;
+    align-items: center;
+    width: 100%;
+    height:100%;
+    padding:0;
+    margin-bottom: 0;
+    margin-top: 1.0rem;
+
+}
+
+.panel-title button {
+    display: flex;
+    color:black;
+    font-size: large;
+    font-weight:bold;
+    justify-content: space-between;
+    align-items: center;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding-right: .625rem;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.panel-icon{
+font-family:"Luckiest Guy", Cursive;
+width: 2.5rem;
+height: 3.0rem;
+font-size: x-large;
+background: #40E0D0;
+color: #00325f;
+display: flex;
+justify-content: center;
+align-items: center;
+align-self: flex-end;
+text-align: center;
+text-justify: center;
+flex-shrink: 0;
+}
+
+#aufgaben-Aufnahmedienst-panel-body{
+    display:none;
+}
+
+#aufgaben-Basisdienst-panel-body{
+    display:none;
+}
+
+#aufgaben-Therapeutischerdienst-panel-body{
+    display:none;
+}
+
+.aufgaben-Frühdienst{
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
   
