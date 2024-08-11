@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ein- und Ausklappbares Formular</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container" id="headline">
+        <div class="top-strip"></div>
+        <!--New Button-------------------------------->
+        <div class="kkd-button"><a href="index.html"><button type="button" class="KKD">KKD</button></a></div>
+        <!--New Button-------------------------------->
+        <form id="pflegeformular">
+            
+            <h1>Frühdienst Aufgaben</h1>
+            <h4>Dienstbeginn: 06:45 Uhr</h4>
+            
+            <h4>Dienstübergabe: 06:45 - 07:00 Uhr</h4>
+            
+            <h4>Im Anschluss Aufgabenverteilung und Vorbereitung</h4>
+            
+            <h4>Im Frühdienst gibt es den sogenannten B Dienst (Basisdienst) und den T Dienst(Therapeutischer Dienst). Der B Dienst arbeitet eng mit dem A Dienst (Aufnahmedienst) zusammen</h4>
+        </form>
+    </div>
+    <br>
+    <div class="form-container">
+        <form id="pflegeformular" class="todo">
+            <h2>To Do's</h2>
+            <p>Bitte haken Sie die erledigten Aufgaben ab.</p>
+        </form>
+    </div>
+    <br>
+    <div class="form-container">
+        <form id="pflegeformular" class="todo">
+            <h2>Ablauf</h2>
+            <div class="aufgaben-Frühdienst">
+            <div>
+            <p>06:45 - 07:00 Uhr</p>
+            <p>07:00 - 07:15 Uhr</p>
+            <p>07:15 - 08:00 Uhr</p>
+            <p>08:00 - 08:30 Uhr</p>
+            <p>09:30 - 10:00 Uhr</p>
+            <p>13:45 - 14:15 Uhr</p>
+                </div>
+            <div>
+                    <p>Übergabe des Nachtdienstes an den Frühdienst</p>
+                    <p>Aufgabenverteilung und Vorbereitung</p>
+                    <p>Medikamentenvergabe und Befindlichkeitsabfrage</p>
+                    <p>Übergabe im Multiprofessionellen Team</p>
+                    <p>Frühstückspause des Personals</p>
+                    <p>Morgenrunde</p>
+            </div>
+            </div>
+        </form>
+    </div>
+<br>
+    <!--Aufgaben Aufnahmedienst---------------------------------------->
+    <div class="form-container">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <button id="aufgaben-Aufnahmedienst">
+                    Die Aufgaben des A Dienstes bestehen in der pflegerischen Aufnahme, hierzu gehören:
+                    <span class="panel-icon" id="aufgaben-Aufnahmedienst-panel-icon">V</span>
+                </button>
+            </h3>
+        </div>
+        <div id="aufgaben-Aufnahmedienst-panel-body">
+        <form id="pflegeformular">
+        <section>
+            <div class="checkboxen">
+                <input type="checkbox" name="aAssessment">
+                <label>
+                    Assessment im KIS ausfüllen
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aVerlaufseintrag">
+                <label>
+                    Verlaufseintrag im KIS
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aMaßnahmen">
+                <label>
+                    Maßnahmenplanung
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aParameter">
+                <label>
+                    Erfassen von RR, Puls, Gewicht, Größe, AAK
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aAusgabeUrinbecher">
+                <label>
+                    Ausgabe des Urinbecher an Patient:in
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aFilzenKörper">
+                <label>
+                    Körperliches filzen
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aFilzenGepäck">
+                <label>
+                    Filzen des mitgebrachten Gespäcks (bei Aufnahme)
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aÜbergabe">
+                <label>
+                    Station zeigen und erklären
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aÜbergabe">
+                <label>
+                    Tagesablauf und Therapieplan zeigen und erklären
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aSicherungMedikamente">
+                <label>
+                    Sicherung mitgebrachter Medikamente
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aÜberleitungArzt">
+                <label>
+                    Überleitung an den ärztlichen Dienst
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aÜbergabe">
+                <label>
+                    Übergabe an das Gesamtteam
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aNachtwachenliste">
+                <label>
+                    Eintragen in die Nachtwachenliste mit Aufnahmedatum und Kurzinformation
+                </label>
+            </div>
+        </section>
+        <br>
+        </form>
+    </div>
+    </div>
+    <br>
+
+<!--Aufgaben Basisdienst---------------------------------------->
+<div class="form-container">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <button id="aufgaben-Basisdienst">
+                Die Aufgaben des B Dienstes umfassen im allgemeinen die Gestaltung der Tagesstruktur für die Patient:innen:
+                <span class="panel-icon" id="aufgaben-Basisdienst-panel-icon">V</span>
+            </button>
+        </h3>
+    </div>
+    <div id="aufgaben-Basisdienst-panel-body">
+    <form id="pflegeformular">
+    <section>
+        <div class="checkboxen">
+            <input type="checkbox" name="bHaesMessungen">
+            <label>
+                Entzugsüberwachung (HAES Messungen)
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bSichtkontrollen">
+            <label>
+                Sichtkontrollen
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bMedikamenteAusteilen">
+            <label>
+                Medikamente austeilen, stellen, bestellen
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bVerbandswechsel">
+            <label>
+                ggf. Verbandswechsel
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bUnterstuetzungPatienten">
+            <label>
+                Unterstützung von Patient:innen mit Hilfebedarf
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bDokumentation">
+            <label>
+                Sicherstellung von KIS Dokumentation
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bVerlegung">
+            <label>
+                ggf. Verlegung bzw. Aufnahmen organisieren
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bZimmerbelegung">
+            <label>
+                Zimmerbelegung regulieren
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bPlantafel">
+            <label>
+                Plantafel bestücken
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bFilzenGepäck">
+            <label>
+                Filzen des mitgebrachten Gespäcks oder Einkäufen (bei Ausgang)
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bScreenings">
+            <label>
+                Drogen Screenings begleiten
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="bAlkoholkontrolle">
+            <label>
+                Atemalkoholkontrollen durchführen
+            </label>
+        </div>
+    </section>
+    <br>
+    </form>
+</div>
+</div>
+<br>
+<div class="form-container">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <button id="aufgaben-Therapeutischerdienst">
+                Die Aufgaben des T Dienstes beinhalten die Vorbereitung bzw. Begleitung therapeutischer Angebote dieser Station:
+                <span class="panel-icon" id="aufgaben-Therapeutischerdienst-panel-icon">V</span>
+            </button>
+        </h3>
+    </div>
+
+    <div id="aufgaben-Therapeutischerdienst-panel-body">
+    <form id="pflegeformular">
+    <section>
+        <div class="checkboxen">
+            <input type="checkbox" name="tOrganisation">
+            <label>
+                Organisation des Tagesablaufes
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tDurchführung">
+            <label>
+                Durchführung und Vorbereitung von pflegetherapeutischen Gruppen
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tMitwirkungMultiprofessionell">
+            <label>
+                Mitwirkung in multiprofessionel besetzten Gruppen
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tBezugspflegegespräche">
+            <label>
+                Bezugspflegegespräche
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tOberarztvisie">
+            <label>
+                Teilnahme und Ausarbeitung von Oberarztvisite
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tBehandlungsplanung">
+            <label>
+                Teilnahme an der Behandlungsplanung
+            </label>
+        </div>
+        <div class="checkboxen">
+            <input type="checkbox" name="tDokumentation">
+            <label>
+                Sicherstellung von KIS Dokumentation
+            </label>
+        </div>
+    </section>
+    <br>
+    </form>
+    </div>
+</div>
+    
+        <br>
+    
+    <br>
+    <script src="frühdienst.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
