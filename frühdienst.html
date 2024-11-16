@@ -60,102 +60,346 @@
 <br>
     <!--Aufgaben Aufnahmedienst---------------------------------------->
     <div class="form-container">
+        <h3>Die Aufgaben des A Dienstes bestehen in der pflegerischen Aufnahme, hierzu gehören:</h3>
+
+    <!--A u f n a h m e 0 1 ---------------------------------------------->
         <div class="panel-heading">
-            <h3 class="panel-title">
-                <button id="aufgaben-Aufnahmedienst">
-                    Die Aufgaben des A Dienstes bestehen in der pflegerischen Aufnahme, hierzu gehören:
-                    <span class="panel-icon" id="aufgaben-Aufnahmedienst-panel-icon">V</span>
+            <h4 class="panel-title">
+                <button id="aufnahme_1">
+                    Aufnahme 1:
+                    <span class="panel-icon" id="aufgaben-Aufnahmedienst-panel-icon1">V</span>
                 </button>
-            </h3>
+            </h4>
         </div>
-        <div id="aufgaben-Aufnahmedienst-panel-body">
+        <div id="aufgaben-Aufnahmedienst-panel-body1">
         <form id="pflegeformular">
         <section>
             <div class="checkboxen">
-                <input type="checkbox" name="aAssessment">
+                <input type="checkbox" name="aAssessment1">
                 <label>
-                    Assessment im KIS ausfüllen
+                    Pat. begrüßen, Gepäck ins Lager, Einweisung entgegennehmen
+                </label>
+            </div>
+            
+            <p>Akte vorbereiten:</p>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aEtiketten1">
+                <label>
+                    Patientenetiketten drucken
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aVerlaufseintrag">
+                <input type="checkbox" name="aNamensschilder1">
                 <label>
-                    Verlaufseintrag im KIS
+                    Zwei Namensschilder drucken
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aMaßnahmen">
+                <input type="checkbox" name="aDokumenteDrucken1">
                 <label>
-                    Maßnahmenplanung
+                    Dokumente drucken (Schweigepflichtsentbindung, Aushang Patientenname, Entlassmanagement)
+                </label>
+            </div>
+
+            <p><b>Labor stellen:</b></p>
+            <div class="checkboxen">
+                <input type="checkbox" name="aDS1">
+                <label>
+                    Ds für den Aufnahmetag
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aParameter">
+                <input type="checkbox" name="aLaborFolgeTag1">
                 <label>
-                    Erfassen von RR, Puls, Gewicht, Größe, AAK
+                    Aufnahmelabor + FT4 für den folgenden Tag
+                </label>
+            </div>
+
+            <p><b>Aufnahmegespräch siehe Aufnahmebogen</b></p>
+            <div class="checkboxen">
+                <input type="checkbox" name="aAssessment1">
+                <label>
+                    Assessment
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aAusgabeUrinbecher">
+                <input type="checkbox" name="aKurve1">
                 <label>
-                    Ausgabe des Urinbecher an Patient:in
+                    Kurve
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aFilzenKörper">
+                <input type="checkbox" name="aVerlaufsbericht1">
                 <label>
-                    Körperliches filzen
+                    Verlaufsbericht
+                </label>
+            </div>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aMaßnahmenErstellen1">
+                <label>
+                    Maßnahmen erstellen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aUnterschrift1">
+                <label>
+                    Dokumente unterschreiben lassen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aUrinbecher1">
+                <label>
+                    Urinbecher aushändigen
+                </label>
+            </div>
+
+            <p>_________________________________________________</p>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aEKG1">
+                <label>
+                    EKG ableiten und eintragen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aDSAufziehen1">
+                <label>
+                    Bei Abgabe DS aufziehen, Schnelltest Benzo + Morphine durchführen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aPatientenEinweisung1">
+                <label>
+                    Pat. die Station (inkl. Stationsregeln) und Zimmer zeigen
+                </label>
+            </div>
+
+             <div class="checkboxen">
+                <input type="checkbox" name="aSchrankschlüssel1">
+                <label>
+                    Pat. Schrankschlpssel aushändigen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aGepäckKontrolle1">
+                <label>
+                    Gepäck kontrollieren
+                </label>
+            </div>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aSicherungMedikamente1">
+                <label>
+                    Ggf. Sicherung mitgebrachter Medikamente
                 </label>
             </div>
             <div class="checkboxen">
-                <input type="checkbox" name="aFilzenGepäck">
-                <label>
-                    Filzen des mitgebrachten Gespäcks (bei Aufnahme)
-                </label>
-            </div>
-            <div class="checkboxen">
-                <input type="checkbox" name="aÜbergabe">
-                <label>
-                    Station zeigen und erklären
-                </label>
-            </div>
-            <div class="checkboxen">
-                <input type="checkbox" name="aÜbergabe">
-                <label>
-                    Tagesablauf und Therapieplan zeigen und erklären
-                </label>
-            </div>
-            <div class="checkboxen">
-                <input type="checkbox" name="aSicherungMedikamente">
-                <label>
-                    Sicherung mitgebrachter Medikamente
-                </label>
-            </div>
-            <div class="checkboxen">
-                <input type="checkbox" name="aÜberleitungArzt">
+                <input type="checkbox" name="aÜberleitungArzt1">
                 <label>
                     Überleitung an den ärztlichen Dienst
                 </label>
             </div>
+            
             <div class="checkboxen">
-                <input type="checkbox" name="aÜbergabe">
-                <label>
-                    Übergabe an das Gesamtteam
-                </label>
-            </div>
-            <div class="checkboxen">
-                <input type="checkbox" name="aNachtwachenliste">
+                <input type="checkbox" name="aNachtwachenliste1">
                 <label>
                     Eintragen in die Nachtwachenliste mit Aufnahmedatum und Kurzinformation
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aTafel1">
+                <label>
+                    Tafel aktualisieren
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aKISBett1">
+                <label>
+                    Ggf. Bettenübersicht im KIS anpassen
                 </label>
             </div>
         </section>
         <br>
         </form>
     </div>
+
+<!----A U F N A H M E   0 2 -------------------------------->
+        
+<div id="aufgaben-Aufnahmedienst-panel-body2">
+        <form id="pflegeformular">
+        <section>
+            <div class="checkboxen">
+                <input type="checkbox" name="aAssessment2">
+                <label>
+                    Pat. begrüßen, Gepäck ins Lager, Einweisung entgegennehmen
+                </label>
+            </div>
+            
+            <p>Akte vorbereiten:</p>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aEtiketten2">
+                <label>
+                    Patientenetiketten drucken
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aNamensschilder2">
+                <label>
+                    Zwei Namensschilder drucken
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aDokumenteDrucken2">
+                <label>
+                    Dokumente drucken (Schweigepflichtsentbindung, Aushang Patientenname, Entlassmanagement)
+                </label>
+            </div>
+
+            <p><b>Labor stellen:</b></p>
+            <div class="checkboxen">
+                <input type="checkbox" name="aDS2">
+                <label>
+                    Ds für den Aufnahmetag
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aLaborFolgeTag2">
+                <label>
+                    Aufnahmelabor + FT4 für den folgenden Tag
+                </label>
+            </div>
+
+            <p><b>Aufnahmegespräch siehe Aufnahmebogen</b></p>
+            <div class="checkboxen">
+                <input type="checkbox" name="aAssessment2">
+                <label>
+                    Assessment
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aKurve2">
+                <label>
+                    Kurve
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aVerlaufsbericht2">
+                <label>
+                    Verlaufsbericht
+                </label>
+            </div>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aMaßnahmenErstellen2">
+                <label>
+                    Maßnahmen erstellen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aUnterschrift2">
+                <label>
+                    Dokumente unterschreiben lassen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aUrinbecher2">
+                <label>
+                    Urinbecher aushändigen
+                </label>
+            </div>
+
+            <p>_________________________________________________</p>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aEKG2">
+                <label>
+                    EKG ableiten und eintragen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aDSAufziehen2">
+                <label>
+                    Bei Abgabe DS aufziehen, Schnelltest Benzo + Morphine durchführen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aPatientenEinweisung2">
+                <label>
+                    Pat. die Station (inkl. Stationsregeln) und Zimmer zeigen
+                </label>
+            </div>
+
+             <div class="checkboxen">
+                <input type="checkbox" name="aSchrankschlüssel2">
+                <label>
+                    Pat. Schrankschlpssel aushändigen
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aGepäckKontrolle2">
+                <label>
+                    Gepäck kontrollieren
+                </label>
+            </div>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aSicherungMedikamente2">
+                <label>
+                    Ggf. Sicherung mitgebrachter Medikamente
+                </label>
+            </div>
+            <div class="checkboxen">
+                <input type="checkbox" name="aÜberleitungArzt2">
+                <label>
+                    Überleitung an den ärztlichen Dienst
+                </label>
+            </div>
+            
+            <div class="checkboxen">
+                <input type="checkbox" name="aNachtwachenliste2">
+                <label>
+                    Eintragen in die Nachtwachenliste mit Aufnahmedatum und Kurzinformation
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aTafel2">
+                <label>
+                    Tafel aktualisieren
+                </label>
+            </div>
+
+            <div class="checkboxen">
+                <input type="checkbox" name="aKISBett2">
+                <label>
+                    Ggf. Bettenübersicht im KIS anpassen
+                </label>
+            </div>
+        </section>
+        <br>
+        </form>
+    </div>
+        
     </div>
     <br>
 
+    
+    
 <!--Aufgaben Basisdienst---------------------------------------->
 <div class="form-container">
     <div class="panel-heading">
