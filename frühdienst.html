@@ -1095,10 +1095,15 @@
     <br>
     <div class="form-container">
             <button type="button" id="resetBtnFr">Zurücksetzen</button>
-            <button type="button" id="logout">logout</button>
+            <button type="button" id="logout-button">logout</button>
     </div>
     <br>
-    
+    <button id="logout-button">Logout</button>
+
+    <script type="module">
+      document.getElementById('logout-button').addEventListener('click', logout);
+    </script>
+
     
     <script src="frühdienst.js"></script>
     <script type="module" src="script.js"></script> 
