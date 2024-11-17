@@ -1,4 +1,5 @@
 import { checkAuthentication, database, ref, set, get, remove } from './auth.js';
+import { logout } from './auth.js';
 
 // Laden der Fortschritte für Checkboxen und Textinputs
 function loadProgress() {
@@ -94,6 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Speichern-Button
     document.getElementById('saveBtn').addEventListener('click', saveProgress);
+
+     document.getElementById('logout-button').addEventListener('click', logout);
 });
 
 
