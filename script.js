@@ -86,23 +86,35 @@ function loadProgress() {
     });
 }
 
+
+//Frühdienst zurücksetzen______________________________________________________
 function resetCheckboxesFr() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
+        checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
+    });
+
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    textInputs.forEach(input => {
+        input.value = '';  // Zurücksetzen der Text-Inputs im DOM
+    });
+
+    // Entfernen der Daten aus der Firebase-Datenbank
+    Promise.all([
+        remove(ref(database, 'pflegeformularFrüh/checkboxes')),
+        remove(ref(database, 'pflegeformularFrüh/textInputs'))
+    ])
+    .then(() => {
+        alert('Formular erfolgreich zurückgesetzt!');
     })
-    
-    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
-        .then(() => {
-            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
-        })
-        .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
-            console.error(error);
-        });
+    .catch((error) => {
+        alert('Fehler beim Zurücksetzen des Formulars.');
+        console.error(error);
+    });
 }
 
-// Zurücksetzen der Checkboxen
+
+// Zurücksetzen der Checkboxen Nachtdienst
 function resetCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -166,8 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     loadProgress();  // Checkboxen laden
-    loadProgressFrüh() // Checkboxen Frühdienst laden
-    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
+    
 
     // Text-Inputs speichern, wenn der Benutzer tippt
     document.querySelectorAll('input[type="text"]').forEach(input => {
