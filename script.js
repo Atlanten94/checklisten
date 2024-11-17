@@ -198,6 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("Frühdienst Reset Button wurde geklickt!"); // Debugging
     resetCheckboxesFrüh();
     });
+
+    document.getElementById('resetBtnFrüh').addEventListener('click', () => {
+    alert("Frühdienst Reset Button geklickt!"); // Debugging
+});
     
     // Speichern der Fortschritte und Text-Inputs (falls nötig)
     document.getElementById('saveBtn').addEventListener('click', () => {
