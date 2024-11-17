@@ -2,6 +2,7 @@ import { signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-aut
 
 // Logout-Funktion
 function logout() {
+  alert('ola Chicka locko in!')
   signOut(auth)  // auth ist die Firebase-Authentifizierungskonfiguration
     .then(() => {
       // Erfolgreich abgemeldet
