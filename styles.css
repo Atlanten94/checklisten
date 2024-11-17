@@ -692,11 +692,11 @@ flex-shrink: 0;
 }
 
 .logout-button{
-    width: 50px;
+    width: 60%;
     padding: 10px 10px;
     margin-top:5px;
     background-color:transparent;
-    font-size: large;
+    
     color: white;
     border:solid black 1px;
     border-radius: 20px;
@@ -705,7 +705,7 @@ flex-shrink: 0;
 }
 
 .reset-button{
-    width: 50px;
+    width:60%;
     padding: 10px 10px;
     margin-top:5px;
     background-color: #007bff;
