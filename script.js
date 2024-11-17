@@ -123,14 +123,14 @@ function saveTextInputsFrüh() {
 
 // Text-Inputs laden im Frühdienst
 function loadTextInputsFrüh() {
-    const textInputsRefFrüh = ref(database, 'pflegeformularFrüh/textInputs');
-    get(textInputsRefFrüh).then((snapshot) => {
+    const textInputsRef = ref(database, 'pflegeformularFrüh/textInputs');
+    get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
-            const inputDataFrüh = snapshot.val();
-            const textInputsFrüh = document.querySelectorAll('input[type="text"]');
+            const inputData = snapshot.val();
+            const textInputs = document.querySelectorAll('input[type="text"]');
 
-            textInputsFrüh.forEach(input => {
-                input.value = inputDataFrüh[input.name] || '';
+            textInputs.forEach(input => {
+                input.value = inputData[input.name] || '';
             });
         }
     }).catch((error) => {
@@ -141,21 +141,21 @@ function loadTextInputsFrüh() {
 // Zurücksetzen der Checkboxen und Textinputs im Frühdienst
 function resetCheckboxesFrüh() {
     // Zurücksetzen der Checkboxen im DOM
-    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
-    checkboxesFrüh.forEach(checkbox => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
 
     // Zurücksetzen der Text-Inputs im DOM
-    //const textInputsFrüh = document.querySelectorAll('input[type="text"]'); textInputsFrüh.forEach(input => {input.value = '';});
+    //const textInputs = document.querySelectorAll('input[type="text"]'); textInputs.forEach(input => {input.value = '';});
 
     // Debugging-Ausgaben für die Kontrolle der Element-Selektion
-    console.log('Checkboxes zurückgesetzt:', checkboxesFrüh.length);
+    console.log('Checkboxes zurückgesetzt:', checkboxes.length);
     
-    //console.log('Text-Inputs zurückgesetzt:', textInputsFrüh.length);
+    //console.log('Text-Inputs zurückgesetzt:', textInputs.length);
 
     // Entfernen der Daten aus der Firebase-Datenbank
-     remove(ref(database, 'pflegeformular/checkboxes'))
+     remove(ref(database, 'pflegeformularFrüh/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
         })
