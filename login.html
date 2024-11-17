@@ -36,7 +36,9 @@
     </div>
 
     <script type="module">
-       
+
+        import { auth } from './auth.js';
+        import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
         // Elemente
         const loginForm = document.getElementById('login-form');
