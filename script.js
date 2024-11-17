@@ -150,7 +150,7 @@ function resetCheckboxesFrüh() {
     //const textInputs = document.querySelectorAll('input[type="text"]'); textInputs.forEach(input => {input.value = '';});
 
     // Debugging-Ausgaben für die Kontrolle der Element-Selektion
-    console.log('Checkboxes zurückgesetzt:', checkboxes.length);
+    //console.log('Checkboxes zurückgesetzt:', checkboxes.length);
     
     //console.log('Text-Inputs zurückgesetzt:', textInputs.length);
 
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Reset-Button
-    document.getElementById('resetBtnFrüh').addEventListener('click', () => {
+    document.getElementById('resetBtnFr').addEventListener('click', () => {
         resetCheckboxesFrüh();
     });
     
