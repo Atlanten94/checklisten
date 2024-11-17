@@ -8,17 +8,16 @@
     <script type="module" src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 <body class="login-body">
     <div class="loginContainer">
-        <h1>Locko dich ein Digga</h1>
+        <h1>Logge dich ein</h1>
         <form id="login-form">
             <section class="user-inputs">
-            <input class="user-login-input" type="email" id="email" placeholder="E-Mail-Adresse" required>
-            <input class="user-login-input" type="password" id="password" placeholder="Passwort" required>
+                <input class="user-login-input" type="email" id="email" placeholder="E-Mail-Adresse" required>
+                <input class="user-login-input" type="password" id="password" placeholder="Passwort" required>
             </section>
             <button class="user-login-button" id="login-button" type="submit">Login</button>
         </form>
@@ -36,44 +35,49 @@
     </div>
 
     <script type="module">
-
+        // Firebase Auth importieren
         import { auth } from './auth.js';
-        import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-
+        import { signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, updatePassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        
         // Elemente
         const loginForm = document.getElementById('login-form');
         const forgotPasswordBtn = document.getElementById('forgot-password-button');
         const messageDiv = document.getElementById('message');
         const passwordChangeContainer = document.getElementById('password-change-container');
         const changePasswordForm = document.getElementById('change-password-form');
-
+        
         // Login-Funktion
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-
+        
             signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-            const user = userCredential.user;
-            messageDiv.textContent = `Willkommen ${user.email}! Bitte ändern Sie Ihr Passwort, falls erforderlich.`;
-            messageDiv.style.color = 'green';
-            passwordChangeContainer.classList.remove('hidden');
-
-        // Weiterleitung zur passenden Seite
-        if (user.email === 'admin@example.com') {
-            window.location.href = 'index.html'; // Admin-Dashboard
-        } else {
-            window.location.href = 'index.html'; // Mitarbeiter-Dashboard
-        }
-    })
-    .catch((error) => {
-        messageDiv.textContent = `Fehler: ${error.message}`;
-        messageDiv.style.color = 'red';
-    });
-
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    messageDiv.textContent = `Willkommen ${user.email}! Bitte ändern Sie Ihr Passwort, falls erforderlich.`;
+                    messageDiv.style.color = 'green';
+                    passwordChangeContainer.classList.remove('hidden');
+        
+                    // Weiterleitung zur passenden Seite
+                    if (user.email === 'admin@example.com') {
+                        window.location.href = 'admin-dashboard.html'; // Admin-Dashboard
+                    } else {
+                        window.location.href = 'user-dashboard.html'; // Mitarbeiter-Dashboard
+                    }
+                })
+                .catch((error) => {
+                    let errorMessage = 'Fehler: ' + error.message;
+                    if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'Ungültige E-Mail-Adresse.';
+                    } else if (error.code === 'auth/wrong-password') {
+                        errorMessage = 'Falsches Passwort.';
+                    }
+                    messageDiv.textContent = errorMessage;
+                    messageDiv.style.color = 'red';
+                });
         });
-
+        
         // Passwort vergessen
         forgotPasswordBtn.addEventListener('click', () => {
             const email = document.getElementById('email').value;
@@ -82,7 +86,7 @@
                 messageDiv.style.color = 'red';
                 return;
             }
-
+        
             sendPasswordResetEmail(auth, email)
                 .then(() => {
                     messageDiv.textContent = 'Passwort-Zurücksetzen-E-Mail gesendet!';
@@ -93,19 +97,19 @@
                     messageDiv.style.color = 'red';
                 });
         });
-
+        
         // Passwort ändern
         changePasswordForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const newPassword = document.getElementById('new-password').value;
-
+        
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     updatePassword(user, newPassword)
                         .then(() => {
                             messageDiv.textContent = 'Passwort erfolgreich geändert!';
                             messageDiv.style.color = 'green';
-                            signOut(auth); // Benutzer ausloggen nach Passwortänderung
+                            signOut(auth); // Benutzer nach der Änderung ausloggen
                         })
                         .catch((error) => {
                             messageDiv.textContent = `Fehler: ${error.message}`;
@@ -118,6 +122,6 @@
             });
         });
     </script>
-
 </body>
 </html>
+
