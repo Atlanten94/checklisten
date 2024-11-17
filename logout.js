@@ -14,3 +14,5 @@ function logout() {
       console.error('Fehler beim Abmelden: ', error);
     });
 }
+
+ document.getElementById('logout-button').addEventListener('click', logout);
