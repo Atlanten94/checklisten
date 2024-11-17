@@ -704,16 +704,23 @@ flex-shrink: 0;
 }
 .logout-button:hover{
      box-shadow:2px 2px 5px black;
+    background-color:transparent;
 }
 
 .logout-button:active{
      box-shadow:2px 2px 5px black inset;
+    background-color:transparent;
 }
 
 .reset-button:hover{
-     box-shadow:2px 2px 5px black;}
+     box-shadow:2px 2px 5px black;
+background-color: #007bff;
+}
+
+
 .reset-button:active{
      box-shadow:2px 2px 5px black inset;
+    background-color: #007bff;
 }
 .reset-button{
     width:60%;
