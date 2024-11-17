@@ -88,15 +88,21 @@ function loadProgress() {
 
 // Zurücksetzen der Checkboxen und Textinputs im Frühdienst
 function resetCheckboxesFrüh() {
+    // Zurücksetzen der Checkboxen im DOM
     const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
     checkboxesFrüh.forEach(checkbox => {
-        checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
+        checkbox.checked = false;
     });
 
+    // Zurücksetzen der Text-Inputs im DOM
     const textInputsFrüh = document.querySelectorAll('input[type="text"]');
     textInputsFrüh.forEach(input => {
-        input.value = '';  // Zurücksetzen der Text-Inputs im DOM
+        input.value = '';
     });
+
+    // Debugging-Ausgaben für die Kontrolle der Element-Selektion
+    console.log('Checkboxes zurückgesetzt:', checkboxesFrüh.length);
+    console.log('Text-Inputs zurückgesetzt:', textInputsFrüh.length);
 
     // Entfernen der Daten aus der Firebase-Datenbank
     Promise.all([
@@ -104,14 +110,14 @@ function resetCheckboxesFrüh() {
         remove(ref(database, 'pflegeformularFrüh/textInputs'))
     ])
     .then(() => {
+        console.log('Formular erfolgreich zurückgesetzt!');
         alert('Formular erfolgreich zurückgesetzt!');
     })
     .catch((error) => {
+        console.error('Fehler beim Zurücksetzen des Formulars:', error);
         alert('Fehler beim Zurücksetzen des Formulars.');
-        console.error(error);
     });
 }
-
 
 // Zurücksetzen der Checkboxen
 function resetCheckboxes() {
