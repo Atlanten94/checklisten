@@ -17,8 +17,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Speichern der Fortschritte für Checkboxen
-function saveProgress() {
+// Universelle Funktionen
+/**
+ * Speichert den Zustand von Checkboxen in Firebase.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function saveCheckboxProgress(path) {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const progress = {};
 
@@ -26,113 +30,48 @@ function saveProgress() {
         progress[checkbox.name] = checkbox.checked;
     });
 
-    set(ref(database, 'pflegeformular/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
-        .then(() => {
-            console.log('Fortschritt erfolgreich gespeichert.');
-        })
-        .catch((error) => {
-            console.error('Fehler beim Speichern des Fortschritts:', error);
-        });
+    set(ref(database, path), progress)
+        .then(() => console.log('Fortschritt erfolgreich gespeichert:', path))
+        .catch((error) => console.error('Fehler beim Speichern des Fortschritts:', error));
 }
 
-// Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
-function saveProgressFrüh() {
-    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
-    const progressFrüh = {};
-
-    checkboxesFrüh.forEach(checkbox => {
-        progressFrüh[checkbox.name] = checkbox.checked;
-    });
-
-    set(ref(database, 'pflegeformularFrüh/checkboxes'), progressFrüh) // Fix für korrektes Speichern der Checkbox-Daten
-        .then(() => {
-            console.log('Fortschritt erfolgreich gespeichert.');
-        })
-        .catch((error) => {
-            console.error('Fehler beim Speichern des Fortschritts:', error);
-        });
-}
-// Laden der Fortschritte für Checkboxen im Frühdienst - pflegeformularFrüh
-function loadProgressFrüh() {
-    const progressRefFrüh = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
-    get(progressRefFrüh).then((snapshot) => {
-        if (snapshot.exists()) {
-            const progressFrüh = snapshot.val();
-            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxesFrüh.forEach(checkbox => {
-                checkbox.checked = progressFrüh[checkbox.name] || false;
-            });
-        }
-    }).catch((error) => {
-        console.error('Fehler beim Laden des Fortschritts:', error);
-    });
-}
-
-// Laden der Fortschritte für Checkboxen im Spätdienst
-function loadProgress() {
-    const progressRef = ref(database, 'pflegeformular/checkboxes'); // Fix für den richtigen Pfad
+/**
+ * Lädt den Zustand von Checkboxen aus Firebase.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function loadCheckboxProgress(path) {
+    const progressRef = ref(database, path);
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = progress[checkbox.name] || false;
             });
+        } else {
+            console.warn('Keine Daten gefunden:', path);
         }
-    }).catch((error) => {
-        console.error('Fehler beim Laden des Fortschritts:', error);
-    });
+    }).catch((error) => console.error('Fehler beim Laden der Checkbox-Daten:', error));
 }
 
-
-//Frühdienst zurücksetzen______________________________________________________
-function resetCheckboxesFr() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
-    });
-
-    const textInputs = document.querySelectorAll('input[type="text"]');
-    textInputs.forEach(input => {
-        input.value = '';  // Zurücksetzen der Text-Inputs im DOM
-    });
-
-    // Entfernen der Daten aus der Firebase-Datenbank
-    Promise.all([
-        remove(ref(database, 'pflegeformularFrüh/checkboxes')),
-        remove(ref(database, 'pflegeformularFrüh/textInputs'))
-    ])
-    .then(() => {
-        alert('Formular erfolgreich zurückgesetzt!');
-    })
-    .catch((error) => {
-        alert('Fehler beim Zurücksetzen des Formulars.');
-        console.error(error);
-    });
-}
-
-
-// Zurücksetzen der Checkboxen Nachtdienst
-function resetCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
+/**
+ * Setzt Checkboxen und zugehörige Daten in Firebase zurück.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function resetCheckboxes(path) {
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false;
-    })
-    
-    remove(ref(database, 'pflegeformular/checkboxes'))
-        .then(() => {
-            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
-        })
-        .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
-            console.error(error);
-        });
+    });
+
+    remove(ref(database, path))
+        .then(() => alert('Checkboxen erfolgreich zurückgesetzt!'))
+        .catch((error) => console.error('Fehler beim Zurücksetzen der Checkboxen:', error));
 }
 
-// Text-Inputs speichern im Frühdienst
-function saveTextInputsFrüh() {
+/**
+ * Speichert den Zustand von Textfeldern in Firebase.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function saveTextInputs(path) {
     const textInputs = document.querySelectorAll('input[type="text"]');
     const inputData = {};
 
@@ -140,70 +79,95 @@ function saveTextInputsFrüh() {
         inputData[input.name] = input.value;
     });
 
-    set(ref(database, 'pflegeformularFrüh/textInputs'), inputData) // Fix für den richtigen Pfad
-        .then(() => {
-            console.log('Text-Inputs erfolgreich gespeichert.');
-        })
-        .catch((error) => {
-            console.error('Fehler beim Speichern der Text-Inputs:', error);
-        });
+    set(ref(database, path), inputData)
+        .then(() => console.log('Text-Inputs erfolgreich gespeichert:', path))
+        .catch((error) => console.error('Fehler beim Speichern der Text-Inputs:', error));
 }
 
-// Text-Inputs laden im Frühdienst
-function loadTextInputsFrüh() {
-    const textInputsRef = ref(database, 'pflegeformularFrüh/textInputs');
+/**
+ * Lädt den Zustand von Textfeldern aus Firebase.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function loadTextInputs(path) {
+    const textInputsRef = ref(database, path);
     get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
             const inputData = snapshot.val();
-            const textInputs = document.querySelectorAll('input[type="text"]');
-
-            textInputs.forEach(input => {
+            document.querySelectorAll('input[type="text"]').forEach(input => {
                 input.value = inputData[input.name] || '';
             });
+        } else {
+            console.warn('Keine Daten gefunden:', path);
         }
-    }).catch((error) => {
-        console.error('Fehler beim Laden der Text-Inputs:', error);
-    });
+    }).catch((error) => console.error('Fehler beim Laden der Text-Inputs:', error));
 }
 
-// DOMContentLoaded Event für Initialisierung
-document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();  // Checkboxen laden
-    
-    // Checkboxen speichern, wenn sie geändert werden
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgress);
-    });
-
-    // Reset-Button
-    document.getElementById('resetBtn').addEventListener('click', () => {
-        resetCheckboxes();
-    });
-
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-    });
-});
-
-// DOMContentLoaded Event für Initialisierung Frühdienst
-document.addEventListener('DOMContentLoaded', () => {
-    loadProgressFrüh() // Checkboxen Frühdienst laden
-    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
-
-    // Text-Inputs speichern, wenn der Benutzer tippt
+/**
+ * Setzt Textfelder und zugehörige Daten in Firebase zurück.
+ * @param {string} path - Der Pfad in der Firebase-Datenbank.
+ */
+function resetTextInputs(path) {
     document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('input', saveTextInputsFrüh);
+        input.value = '';
     });
-     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgressFrüh);
-    });
-    
-// Reset-Button
-    document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetCheckboxesFr();
-    });
-      
+
+    remove(ref(database, path))
+        .then(() => alert('Text-Inputs erfolgreich zurückgesetzt!'))
+        .catch((error) => console.error('Fehler beim Zurücksetzen der Text-Inputs:', error));
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('Nachdienst.html')) {
+        const checkboxPath = 'pflegeformular/checkboxes';
+        const textInputPath = 'pflegeformular/textInputs';
+
+        // Fortschritt laden
+        loadCheckboxProgress(checkboxPath);
+        loadTextInputs(textInputPath);
+
+        // Checkbox-Events
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => saveCheckboxProgress(checkboxPath));
+        });
+
+        // Text-Input-Events
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('input', () => saveTextInputs(textInputPath));
+        });
+
+        // Reset-Button
+        document.getElementById('resetBtn')?.addEventListener('click', () => {
+            resetCheckboxes(checkboxPath);
+            resetTextInputs(textInputPath);
+        });
+    } else if (window.location.pathname.includes('frühdienst.html')) {
+        const checkboxPath = 'pflegeformularFrüh/checkboxes';
+        const textInputPath = 'pflegeformularFrüh/textInputs';
+
+        // Fortschritt laden
+        loadCheckboxProgress(checkboxPath);
+        loadTextInputs(textInputPath);
+
+        // Checkbox-Events
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => saveCheckboxProgress(checkboxPath));
+        });
+
+        // Text-Input-Events
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('input', () => saveTextInputs(textInputPath));
+        });
+
+        // Reset-Button
+        document.getElementById('resetBtnFr')?.addEventListener('click', () => {
+            resetCheckboxes(checkboxPath);
+            resetTextInputs(textInputPath);
+        });
+    }
 });
+
+    
+
 
 
