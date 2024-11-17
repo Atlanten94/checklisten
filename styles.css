@@ -580,7 +580,23 @@ text-justify: center;
 flex-shrink: 0;
 }
 
-#aufgaben-Aufnahmedienst-panel-body{
+#aufgaben-Aufnahmedienst-panel-body1{
+    display:none;
+}
+
+#aufgaben-Aufnahmedienst-panel-body2{
+    display:none;
+}
+
+#aufgaben-Aufnahmedienst-panel-body3{
+    display:none;
+}
+
+#aufgaben-Aufnahmedienst-panel-body4{
+    display:none;
+}
+
+#aufgaben-Aufnahmedienst-panel-body5{
     display:none;
 }
 
