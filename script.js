@@ -17,6 +17,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+// Laden der Fortschritte für Checkboxen im Spätdienst
+function loadProgress() {
+    const progressRef = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
+    get(progressRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const progress = snapshot.val();
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = progress[checkbox.name] || false;
+            });
+        }
+    }).catch((error) => {
+        console.error('Fehler beim Laden des Fortschritts:', error);
+    });
+}
+
 // Speichern der Fortschritte für Checkboxen
 function saveProgress() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -33,23 +50,6 @@ function saveProgress() {
         .catch((error) => {
             console.error('Fehler beim Speichern des Fortschritts:', error);
         });
-}
-
-// Laden der Fortschritte für Checkboxen im Spätdienst
-function loadProgress() {
-    const progressRef = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
-    get(progressRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = progress[checkbox.name] || false;
-            });
-        }
-    }).catch((error) => {
-        console.error('Fehler beim Laden des Fortschritts:', error);
-    });
 }
 
 // Zurücksetzen der Checkboxen Nachtdienst
@@ -83,10 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resetCheckboxes();
     });
 
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-    });
 });
 
 
