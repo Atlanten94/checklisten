@@ -132,25 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     });
 
-// DOMContentLoaded Event für Initialisierung
-document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();  // Checkboxen laden
-    
-    // Checkboxen speichern, wenn sie geändert werden
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgress);
-    });
-
-    // Reset-Button
-    document.getElementById('resetBtn').addEventListener('click', () => {
-        resetCheckboxes();
-    });
-
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-    });
-});
 
     
 
