@@ -26,7 +26,7 @@ function saveProgress() {
         progress[checkbox.name] = checkbox.checked;
     });
 
-    set(ref(database, 'pflegeformular/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
+    set(ref(database, 'pflegeformularFrüh/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
         .then(() => {
             console.log('Fortschritt erfolgreich gespeichert.');
         })
@@ -37,7 +37,7 @@ function saveProgress() {
 
 // Laden der Fortschritte für Checkboxen im Spätdienst
 function loadProgress() {
-    const progressRef = ref(database, 'pflegeformular/checkboxes'); // Fix für den richtigen Pfad
+    const progressRef = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
@@ -59,7 +59,7 @@ function resetCheckboxes() {
         checkbox.checked = false;
     })
     
-    remove(ref(database, 'pflegeformular/checkboxes'))
+    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
         })
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Reset-Button
-    document.getElementById('resetBtn').addEventListener('click', () => {
+    document.getElementById('resetBtnFr').addEventListener('click', () => {
         resetCheckboxes();
     });
 
