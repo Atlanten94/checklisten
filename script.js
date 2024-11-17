@@ -67,17 +67,77 @@ remove(ref(database, 'pflegeformular'))
 
 document.addEventListener('DOMContentLoaded', () => {
 loadProgress();
-
+loadTextInputs();
+    
 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', saveProgress);
 });
 
+document.querySelectorAll('input[type="text"]').forEach(input => {
+    input.addEventListener('input', saveTextInputs);
+});
+
 document.getElementById('resetBtn').addEventListener('click', () => {
     resetCheckboxes();
+    resetTextInputs();
     });
 
 document.getElementById('saveBtn').addEventListener('click', () => {
     saveProgress();
+    saveTextInputs();
     });
 
 });
+
+//_______________ T E X T   I N P U T S ____________________
+// Text-Inputs speichern
+function saveTextInputs() {
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    const inputData = {};
+
+    textInputs.forEach(input => {
+        inputData[input.name] = input.value;
+    });
+
+    set(ref(database, 'pflegeformular/textInputs'), inputData)
+    .then(() => {
+        console.log('Text-Inputs erfolgreich gespeichert.');
+    })
+    .catch((error) => {
+        console.error('Fehler beim Speichern der Text-Inputs:', error);
+    });
+}
+
+// Text-Inputs laden
+function loadTextInputs() {
+    const textInputsRef = ref(database, 'pflegeformular/textInputs');
+    get(textInputsRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const inputData = snapshot.val();
+            const textInputs = document.querySelectorAll('input[type="text"]');
+
+            textInputs.forEach(input => {
+                input.value = inputData[input.name] || '';
+            });
+        }
+    }).catch((error) => {
+        console.error('Fehler beim Laden der Text-Inputs:', error);
+    });
+}
+
+// Zurücksetzen der Text-Inputs
+function resetTextInputs() {
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    textInputs.forEach(input => {
+        input.value = '';
+    });
+
+    remove(ref(database, 'pflegeformular/textInputs'))
+    .then(() => {
+        alert('Text-Inputs erfolgreich zurückgesetzt!');
+    })
+    .catch((error) => {
+        alert('Fehler beim Zurücksetzen der Text-Inputs.');
+        console.error(error);
+    });
+}
