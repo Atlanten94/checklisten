@@ -8,18 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
-<script type="module">
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-        const auth = getAuth();
-
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                // Benutzer nicht eingeloggt, zurück zur Login-Seite
-                window.location.href = '/login.html';
-            }
-        });
-    </script>
+        
 </head>
 <body class="Dashboard">
     <div id="title">
@@ -42,5 +32,6 @@
         </a>
     </div>
 <script type="module" src="script.js"></script>
+<script type="module" src="authGuard.js></script>
 </body>
 </html>
