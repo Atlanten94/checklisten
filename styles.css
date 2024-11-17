@@ -696,8 +696,7 @@ flex-shrink: 0;
     padding: 10px 10px;
     margin-top:5px;
     background-color:transparent;
-    
-    color: white;
+    color: black;
     border:solid black 1px;
     border-radius: 20px;
     cursor: pointer;
