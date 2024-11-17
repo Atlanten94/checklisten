@@ -20,7 +20,7 @@ const database = getDatabase(app);
 
     // Speichern der Fortschritte für Checkboxen
 function saveProgress() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const progress = {};
 
     checkboxes.forEach(checkbox => {
@@ -42,7 +42,7 @@ function loadProgress() {
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
             checkboxes.forEach(checkbox => {
                 checkbox.checked = progress[checkbox.name] || false;
@@ -55,7 +55,7 @@ function loadProgress() {
 
 // Zurücksetzen der Checkboxen Nachtdienst
 function resetCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProgress();  // Checkboxen laden
     
     // Checkboxen speichern, wenn sie geändert werden
-    document.querySelectorAll('input[type="checkbox"].nacht').forEach(checkbox => {
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
     });
 
