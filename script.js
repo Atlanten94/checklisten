@@ -155,7 +155,7 @@ function loadTextInputsFrüh() {
             const inputData = snapshot.val();
             const textInputs = document.querySelectorAll('input[type="text"]');
 
-            textInputsFrüh.forEach(input => {
+            textInputs.forEach(input => {
                 input.value = inputData[input.name] || '';
             });
         }
