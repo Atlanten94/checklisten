@@ -65,7 +65,7 @@ h2 {
     border: solid black 1px;
 }
 
-button:hover{
+#forgot-password-button:hover{
     box-shadow:2px 2px 5px black;
 }
 .user-login-button:hover {
@@ -73,7 +73,7 @@ button:hover{
     box-shadow:2px 2px 5px black;
 }
 
-button:active{
+.user-login-button:active{
     box-shadow:2px 2px 5px black inset;
 }
 
