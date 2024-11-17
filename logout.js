@@ -18,5 +18,4 @@ function logout() {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('logout-button').addEventListener('click', logout);
-  alert('Hola chicco locco in!')
 });
