@@ -96,7 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Speichern-Button
     document.getElementById('saveBtn').addEventListener('click', saveProgress);
 
-     document.getElementById('logout-button').addEventListener('click', logout);
+     document.getElementById('logout-button').addEventListener('click', () => {
+    alert('Logout-Button funktioniert.'); // Debugging
+    logout();
+});
+
 });
 
 
