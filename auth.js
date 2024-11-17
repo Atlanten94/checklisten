@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 // Firebase-Konfiguration
 const firebaseConfig = {
@@ -14,7 +15,7 @@ const firebaseConfig = {
     measurementId: "G-WDLP80WGEB"
 };
 
-// Firebase-Initialisierung
+// Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
@@ -23,14 +24,13 @@ const database = getDatabase(app);
 export function checkAuthentication() {
     onAuthStateChanged(auth, (user) => {
         if (!user) {
-            // Kein Benutzer eingeloggt, Weiterleitung zur Login-Seite
             alert('Bitte loggen Sie sich ein.');
             window.location.href = "login.html";
         }
     });
 }
 
-// Logout-Funktion (optional)
+// Logout-Funktion
 export function logout() {
     signOut(auth)
         .then(() => {
@@ -42,5 +42,6 @@ export function logout() {
         });
 }
 
-// Exporte für die anderen Dateien
-export { auth, database };
+// Exporte für die Verwendung in anderen Dateien
+export { app, auth, database, ref, set, get, remove };
+
