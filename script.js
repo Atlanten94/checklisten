@@ -13,139 +13,72 @@ const firebaseConfig = {
     measurementId: "G-WDLP80WGEB"
 };
 
-// Firebase-Konfiguration und Initialisierung
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Speichern der Fortschritte für Checkboxen
 function saveProgress() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const progress = {};
 
     checkboxes.forEach(checkbox => {
-        progress[checkbox.name] = checkbox.checked;
+    progress[checkbox.name] = checkbox.checked;
     });
 
-    set(ref(database, 'pflegeformular/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
-        .then(() => {
-            console.log('Fortschritt erfolgreich gespeichert.');
-        })
-        .catch((error) => {
-            console.error('Fehler beim Speichern des Fortschritts:', error);
-        });
+    set(ref(database, 'pflegeformular'), progress)
+    .then(() => {
+    console.log('Fortschritt erfolgreich gespeichert.');
+    })
+    .catch((error) => {
+    console.error('Fehler beim Speichern des Fortschritts:', error);
+    });
 }
 
-// Laden der Fortschritte für Checkboxen
 function loadProgress() {
-    const progressRef = ref(database, 'pflegeformular/checkboxes'); // Fix für den richtigen Pfad
-    get(progressRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = progress[checkbox.name] || false;
-            });
-        }
-    }).catch((error) => {
-        console.error('Fehler beim Laden des Fortschritts:', error);
-    });
-}
-
-// Zurücksetzen der Checkboxen
-function resetCheckboxes() {
+const progressRef = ref(database, 'pflegeformular');
+get(progressRef).then((snapshot) => {
+    if (snapshot.exists()) {
+    const progress = snapshot.val();
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
     checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
+        checkbox.checked = progress[checkbox.name] || false;
     });
-
-    remove(ref(database, 'pflegeformular/checkboxes'))
-        .then(() => {
-            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
-        })
-        .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
-            console.error(error);
-        });
-}
-
-// Text-Inputs speichern
-function saveTextInputs() {
-    const textInputs = document.querySelectorAll('input[type="text"]');
-    const inputData = {};
-
-    textInputs.forEach(input => {
-        inputData[input.name] = input.value;
-    });
-
-    set(ref(database, 'pflegeformular/textInputs'), inputData) // Fix für den richtigen Pfad
-        .then(() => {
-            console.log('Text-Inputs erfolgreich gespeichert.');
-        })
-        .catch((error) => {
-            console.error('Fehler beim Speichern der Text-Inputs:', error);
-        });
-}
-
-// Text-Inputs laden
-function loadTextInputs() {
-    const textInputsRef = ref(database, 'pflegeformular/textInputs');
-    get(textInputsRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const inputData = snapshot.val();
-            const textInputs = document.querySelectorAll('input[type="text"]');
-
-            textInputs.forEach(input => {
-                input.value = inputData[input.name] || '';
-            });
-        }
+    }
     }).catch((error) => {
-        console.error('Fehler beim Laden der Text-Inputs:', error);
+    console.error('Fehler beim Laden des Fortschritts:', error);
     });
 }
 
-// Zurücksetzen der Text-Inputs
-function resetTextInputs() {
-    const textInputs = document.querySelectorAll('input[type="text"]');
-    textInputs.forEach(input => {
-        input.value = '';
-    });
+function resetCheckboxes() {
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach(checkbox => {
+    checkbox.checked = false;
+});
 
-    remove(ref(database, 'pflegeformular/textInputs'))
-        .then(() => {
-            alert('Text-Inputs erfolgreich zurückgesetzt!');
-        })
-        .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Text-Inputs.');
-            console.error(error);
-        });
+remove(ref(database, 'pflegeformular'))
+    .then(() => {
+    alert('Kontrollkästchen erfolgreich zurückgesetzt!');
+    })
+    .catch((error) => {
+    alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
+    console.error(error);
+    });
 }
 
-// DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();  // Checkboxen laden
-    loadTextInputs();  // Text-Inputs laden
+loadProgress();
 
-    // Text-Inputs speichern, wenn der Benutzer tippt
-    document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('input', saveTextInputs);
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', saveProgress);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+    resetCheckboxes();
     });
 
-    // Checkboxen speichern, wenn sie geändert werden
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgress);
+document.getElementById('saveBtn').addEventListener('click', () => {
+    saveProgress();
     });
 
-    // Reset-Button
-    document.getElementById('resetBtn').addEventListener('click', () => {
-        resetCheckboxes();
-        resetTextInputs();
-    });
-
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-        saveTextInputs();
-    });
 });
 
