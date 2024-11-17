@@ -1,6 +1,25 @@
-document.getElementById('aufgaben-Aufnahmedienst').addEventListener('click', function() {
-    var panelBody = document.getElementById('aufgaben-Aufnahmedienst-panel-body');
-    var panelIcon = document.getElementById('aufgaben-Aufnahmedienst-panel-icon');
+document.getElementById('aufnahme_1').addEventListener('click', function() {
+    var panelBody = document.getElementById('aufgaben-Aufnahmedienst-panel-body1');
+    var panelIcon = document.getElementById('aufgaben-Aufnahmedienst-panel-icon1');
+    
+    // Toggle display of the panel body
+    if (panelBody.style.display === 'none' || panelBody.style.display === '') {
+        panelBody.style.display = 'block';
+    } else {
+        panelBody.style.display = 'none';
+    }
+    
+    // Toggle rotation of the icon
+    if (panelIcon.style.transform === 'rotate(180deg)') {
+        panelIcon.style.transform = 'rotate(0deg)';
+    } else {
+        panelIcon.style.transform = 'rotate(180deg)';
+    }
+});
+
+document.getElementById('aufnahme_2').addEventListener('click', function() {
+    var panelBody = document.getElementById('aufgaben-Aufnahmedienst-panel-body2');
+    var panelIcon = document.getElementById('aufgaben-Aufnahmedienst-panel-icon2');
     
     // Toggle display of the panel body
     if (panelBody.style.display === 'none' || panelBody.style.display === '') {
