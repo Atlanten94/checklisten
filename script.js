@@ -37,10 +37,10 @@ function saveProgress() {
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
-    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const progress = {};
 
-    checkboxesFrüh.forEach(checkbox => {
+    checkboxes.forEach(checkbox => {
         progress[checkbox.name] = checkbox.checked;
     });
 
@@ -92,8 +92,8 @@ function resetCheckboxesFrüh() {
         checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
     });
 
-    const textInputsFrüh = document.querySelectorAll('input[type="text"]');
-    textInputsFrüh.forEach(input => {
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    textInputs.forEach(input => {
         input.value = '';  // Zurücksetzen der Text-Inputs im DOM
     });
 
@@ -131,10 +131,10 @@ function resetCheckboxes() {
 
 // Text-Inputs speichern im Frühdienst
 function saveTextInputsFrüh() {
-    const textInputsFrüh = document.querySelectorAll('input[type="text"]');
+    const textInputs = document.querySelectorAll('input[type="text"]');
     const inputData = {};
 
-    textInputsFrüh.forEach(input => {
+    textInputs.forEach(input => {
         inputData[input.name] = input.value;
     });
 
@@ -149,11 +149,11 @@ function saveTextInputsFrüh() {
 
 // Text-Inputs laden im Frühdienst
 function loadTextInputsFrüh() {
-    const textInputsRefFrüh = ref(database, 'pflegeformularFrüh/textInputs');
-    get(textInputsRefFrüh).then((snapshot) => {
+    const textInputsRef = ref(database, 'pflegeformularFrüh/textInputs');
+    get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
-            const inputDataFrüh = snapshot.val();
-            const textInputsFrüh = document.querySelectorAll('input[type="text"]');
+            const inputData = snapshot.val();
+            const textInputs = document.querySelectorAll('input[type="text"]');
 
             textInputsFrüh.forEach(input => {
                 input.value = inputData[input.name] || '';
@@ -195,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Speichern der Fortschritte und Text-Inputs (falls nötig)
     document.getElementById('saveBtn').addEventListener('click', () => {
         saveProgress();
-        saveTextInputs();
     });
 });
 
