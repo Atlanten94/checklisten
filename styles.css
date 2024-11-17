@@ -65,7 +65,7 @@ h2 {
     border: solid black 1px;
 }
 
-#forgot-password-button:hover{
+button:hover{
     box-shadow:2px 2px 5px black;
 }
 .user-login-button:hover {
@@ -73,10 +73,7 @@ h2 {
     box-shadow:2px 2px 5px black;
 }
 
-.user-login-button:active{
-    box-shadow:2px 2px 5px black inset;
-}
-#forgot-password-button:active{
+button:active{
     box-shadow:2px 2px 5px black inset;
 }
 
@@ -692,5 +689,30 @@ flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     text-align: left;
+}
+
+.logout-button{
+    width: 50px;
+    padding: 10px 10px;
+    margin-top:5px;
+    background-color:transparent;
+    font-size: large;
+    color: white;
+    border:solid black 1px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+reset-button{
+    width: 50px;
+    padding: 10px 10px;
+    margin-top:5px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor:pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
   
