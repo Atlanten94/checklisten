@@ -166,25 +166,6 @@ function loadTextInputsFrüh() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadProgressFrüh() // Checkboxen Frühdienst laden
-    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
-
-    // Text-Inputs speichern, wenn der Benutzer tippt
-    document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('input', saveTextInputsFrüh);
-    });
-     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgressFrüh);
-    });
-    
-// Reset-Button
-    document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetCheckboxesFr();
-    });
-      
-});
-
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     loadProgress();  // Checkboxen laden
@@ -203,6 +184,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('saveBtn').addEventListener('click', () => {
         saveProgress();
     });
+});
+
+// DOMContentLoaded Event für Initialisierung Frühdienst
+document.addEventListener('DOMContentLoaded', () => {
+    loadProgressFrüh() // Checkboxen Frühdienst laden
+    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
+
+    // Text-Inputs speichern, wenn der Benutzer tippt
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.addEventListener('input', saveTextInputsFrüh);
+    });
+     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', saveProgressFrüh);
+    });
+    
+// Reset-Button
+    document.getElementById('resetBtnFr').addEventListener('click', () => {
+        resetCheckboxesFr();
+    });
+      
 });
 
 
