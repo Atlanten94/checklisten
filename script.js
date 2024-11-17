@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', saveTextInputsFrüh);
     });
      document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+         alert('Gecheckt.');
         checkbox.addEventListener('change', saveProgress);
     });
     
