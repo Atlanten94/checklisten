@@ -1,66 +1,43 @@
-// Your web app's Firebase configuration
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getDatabase, ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { checkAuthentication, database, ref, set, get, remove } from './auth.js';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyB3a7mBkYun-pW-reZ90qDzWKxM-Nntbc0",
-    authDomain: "dienstaufgaben-42703.firebaseapp.com",
-    databaseURL: "https://dienstaufgaben-42703-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "dienstaufgaben-42703",
-    storageBucket: "dienstaufgaben-42703.appspot.com",
-    messagingSenderId: "308022795905",
-    appId: "1:308022795905:web:8d395d93530aaf368ef780",
-    measurementId: "G-WDLP80WGEB"
-};
-
-// Firebase-Konfiguration und Initialisierung
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Laden der Fortschritte für Checkboxen im Spätdienst
+// Laden der Fortschritte für Checkboxen und Textinputs
 function loadProgress() {
     const progressRef = ref(database, 'pflegeformularFrüh/progress'); // Pfad für Fortschritte
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
 
-             // Textinputs aktualisieren
+            // Textinputs aktualisieren
             const textInputs = document.querySelectorAll('input[type="text"]');
             textInputs.forEach(input => {
                 input.value = progress.textInputs?.[input.name] || '';
             });
-            
+
             // Checkboxen aktualisieren
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = progress.checkboxes?.[checkbox.name] || false;
             });
-
-           
         }
     }).catch((error) => {
         console.error('Fehler beim Laden des Fortschritts:', error);
     });
 }
 
-
-// Speichern der Fortschritte für Checkboxen
+// Speichern der Fortschritte für Checkboxen und Textinputs
 function saveProgress() {
-    // Fortschritte für Textinputs erfassen
     const textInputs = document.querySelectorAll('input[type="text"]');
     const textInputProgress = {};
     textInputs.forEach(input => {
         textInputProgress[input.name] = input.value;
     });
-    
-    // Fortschritte für Checkboxen erfassen
+
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkboxProgress = {};
     checkboxes.forEach(checkbox => {
         checkboxProgress[checkbox.name] = checkbox.checked;
     });
 
-    // Fortschritte in der Datenbank speichern
     const progress = {
         checkboxes: checkboxProgress,
         textInputs: textInputProgress
@@ -75,23 +52,18 @@ function saveProgress() {
         });
 }
 
-
-// Zurücksetzen der Checkboxen Nachtdienst
+// Zurücksetzen der Fortschritte
 function resetFrühdienst() {
-
-    // Textinputs zurücksetzen
     const textInputs = document.querySelectorAll('input[type="text"]');
     textInputs.forEach(input => {
         input.value = '';
     });
-    
-    // Checkboxen zurücksetzen
+
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     });
 
-    // Fortschritte in der Datenbank zurücksetzen
     remove(ref(database, 'pflegeformularFrüh/progress'))
         .then(() => {
             alert('Kontrollkästchen und Texteingaben erfolgreich zurückgesetzt!');
@@ -102,30 +74,28 @@ function resetFrühdienst() {
         });
 }
 
-
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();  // Checkboxen laden
-    
-    // Checkboxen speichern, wenn sie geändert werden
+    checkAuthentication(); // Authentifizierung prüfen
+    loadProgress();        // Daten laden
+
+    // Event Listener für Checkboxen
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
     });
 
+    // Event Listener für Textinputs
     document.querySelectorAll('input[type="text"]').forEach(textInput => {
-    textInput.addEventListener('input', saveProgress); // Bei Texteingabe speichern
+        textInput.addEventListener('input', saveProgress);
     });
 
     // Reset-Button
-    document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetFrühdienst();
-    });
+    document.getElementById('resetBtnFr').addEventListener('click', resetFrühdienst);
 
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-    });
+    // Speichern-Button
+    document.getElementById('saveBtn').addEventListener('click', saveProgress);
 });
+
 
 
 
