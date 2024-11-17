@@ -37,14 +37,14 @@ function saveProgress() {
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const progress = {};
+    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
+    const progressFrüh = {};
 
-    checkboxes.forEach(checkbox => {
-        progress[checkbox.name] = checkbox.checked;
+    checkboxesFrüh.forEach(checkbox => {
+        progressFrüh[checkbox.name] = checkbox.checked;
     });
 
-    set(ref(database, 'pflegeformularFrüh/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
+    set(ref(database, 'pflegeformularFrüh/checkboxes'), progressFrüh) // Fix für korrektes Speichern der Checkbox-Daten
         .then(() => {
             console.log('Fortschritt erfolgreich gespeichert.');
         })
@@ -57,11 +57,11 @@ function loadProgressFrüh() {
     const progressRefFrüh = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
     get(progressRefFrüh).then((snapshot) => {
         if (snapshot.exists()) {
-            const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const progressFrüh = snapshot.val();
+            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
 
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = progress[checkbox.name] || false;
+            checkboxesFrüh.forEach(checkbox => {
+                checkbox.checked = progressFrüh[checkbox.name] || false;
             });
         }
     }).catch((error) => {
@@ -85,6 +85,7 @@ function loadProgress() {
         console.error('Fehler beim Laden des Fortschritts:', error);
     });
 }
+
 // Zurücksetzen der Checkboxen und Textinputs im Frühdienst
 function resetCheckboxesFrüh() {
     const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
@@ -149,14 +150,14 @@ function saveTextInputsFrüh() {
 
 // Text-Inputs laden im Frühdienst
 function loadTextInputsFrüh() {
-    const textInputsRef = ref(database, 'pflegeformularFrüh/textInputs');
+    const textInputsRefFrüh = ref(database, 'pflegeformularFrüh/textInputs');
     get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
-            const inputData = snapshot.val();
-            const textInputs = document.querySelectorAll('input[type="text"]');
+            const inputDataFrüh = snapshot.val();
+            const textInputsFrüh = document.querySelectorAll('input[type="text"]');
 
-            textInputs.forEach(input => {
-                input.value = inputData[input.name] || '';
+            textInputsFrüh.forEach(input => {
+                input.value = inputDataFrüh[input.name] || '';
             });
         }
     }).catch((error) => {
