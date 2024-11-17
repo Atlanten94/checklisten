@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getDatabase, ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB3a7mBkYun-pW-reZ90qDzWKxM-Nntbc0",
@@ -13,6 +14,13 @@ const firebaseConfig = {
     appId: "1:308022795905:web:8d395d93530aaf368ef780",
     measurementId: "G-WDLP80WGEB"
 };
+
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        // Benutzer nicht eingeloggt, zurück zur Login-Seite
+        window.location.href = '/login.html';
+    }
+});
 
 // Firebase-Konfiguration und Initialisierung
 const app = initializeApp(firebaseConfig);
