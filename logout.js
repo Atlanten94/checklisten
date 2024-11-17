@@ -15,4 +15,6 @@ function logout() {
     });
 }
 
- document.getElementById('logout-button').addEventListener('click', logout);
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('logout-button').addEventListener('click', logout);
+});
