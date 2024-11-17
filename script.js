@@ -155,7 +155,7 @@ function resetCheckboxesFrüh() {
     //console.log('Text-Inputs zurückgesetzt:', textInputs.length);
 
     // Entfernen der Daten aus der Firebase-Datenbank
-     remove(ref(database, 'pflegeformularFrüh/checkboxes'))
+     remove(ref(database, 'pflegeformular/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
         })
