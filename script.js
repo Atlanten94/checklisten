@@ -151,7 +151,7 @@ function saveTextInputsFrüh() {
 // Text-Inputs laden im Frühdienst
 function loadTextInputsFrüh() {
     const textInputsRefFrüh = ref(database, 'pflegeformularFrüh/textInputs');
-    get(textInputsRef).then((snapshot) => {
+    get(textInputsRefFrüh).then((snapshot) => {
         if (snapshot.exists()) {
             const inputDataFrüh = snapshot.val();
             const textInputsFrüh = document.querySelectorAll('input[type="text"]');
