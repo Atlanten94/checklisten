@@ -97,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('saveBtn').addEventListener('click', saveProgress);
 
      document.getElementById('logout-button').addEventListener('click', logout);
-    alert('Ey du alte Ficksau!')
 });
 
 
