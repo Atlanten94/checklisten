@@ -93,6 +93,22 @@ function resetCheckboxes() {
         checkbox.checked = false;
     })
     
+    remove(ref(database, 'pflegeformular/checkboxes'))
+        .then(() => {
+            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
+        })
+        .catch((error) => {
+            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
+            console.error(error);
+        });
+}
+
+function resetCheckboxesFr() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    })
+    
     remove(ref(database, 'pflegeformularFrüh/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
@@ -136,33 +152,6 @@ function loadTextInputsFrüh() {
     }).catch((error) => {
         console.error('Fehler beim Laden der Text-Inputs:', error);
     });
-}
-
-// Zurücksetzen der Checkboxen und Textinputs im Frühdienst
-function resetCheckboxesFr() {
-    // Zurücksetzen der Checkboxen im DOM
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    });
-
-    // Zurücksetzen der Text-Inputs im DOM
-    //const textInputs = document.querySelectorAll('input[type="text"]'); textInputs.forEach(input => {input.value = '';});
-
-    // Debugging-Ausgaben für die Kontrolle der Element-Selektion
-    //console.log('Checkboxes zurückgesetzt:', checkboxes.length);
-    
-    //console.log('Text-Inputs zurückgesetzt:', textInputs.length);
-
-    // Entfernen der Daten aus der Firebase-Datenbank
-     remove(ref(database, 'pflegeformularFrüh/checkboxes'))
-        .then(() => {
-            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
-        })
-        .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
-            console.error(error);
-        });
 }
 
 // DOMContentLoaded Event für Initialisierung
