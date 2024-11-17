@@ -10,7 +10,7 @@ document.getElementById('loginForm').addEventListener('submit', (event) => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             console.log('Eingeloggt:', userCredential.user);
-            window.location.href = "dashboard.html";
+            window.location.href = "index.html";
         })
         .catch((error) => {
             console.error('Login fehlgeschlagen:', error.message);
