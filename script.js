@@ -108,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
     });
+    document.querySelectorAll('input[type="text"]').forEach(textInput => {
+    textInput.addEventListener('input', saveProgress); // Bei Texteingabe speichern
+    });
 
     // Reset-Button
     document.getElementById('resetBtnFr').addEventListener('click', () => {
