@@ -15,19 +15,22 @@ const firebaseConfig = {
     measurementId: "G-WDLP80WGEB"
 };
 
-onAuthStateChanged(auth, (user) => {
-    if (!user) {
-        // Benutzer nicht eingeloggt, zurück zur Login-Seite
-        window.location.href = '/login.html';
-    }
-});
-
 // Firebase-Konfiguration und Initialisierung
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
 export { auth };
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // Benutzer ist eingeloggt - Funktionen ausführen
+        loadProgressFrüh();
+        loadTextInputsFrüh();
+    } else {
+        window.location.href = '/login.html';
+    }
+});
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
