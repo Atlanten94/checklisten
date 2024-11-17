@@ -1,6 +1,7 @@
 // Your web app's Firebase configuration
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 import { getDatabase, ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB3a7mBkYun-pW-reZ90qDzWKxM-Nntbc0",
@@ -17,6 +18,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export { auth };
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
