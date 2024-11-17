@@ -87,13 +87,13 @@ function loadProgress() {
 }
 // Zurücksetzen der Checkboxen und Textinputs im Frühdienst
 function resetCheckboxesFrüh() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
+    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
+    checkboxesFrüh.forEach(checkbox => {
         checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
     });
 
-    const textInputs = document.querySelectorAll('input[type="text"]');
-    textInputs.forEach(input => {
+    const textInputsFrüh = document.querySelectorAll('input[type="text"]');
+    textInputsFrüh.forEach(input => {
         input.value = '';  // Zurücksetzen der Text-Inputs im DOM
     });
 
@@ -117,8 +117,8 @@ function resetCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
-    });
-
+    })
+    
     remove(ref(database, 'pflegeformular/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
