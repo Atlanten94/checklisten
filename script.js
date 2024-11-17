@@ -19,14 +19,21 @@ const database = getDatabase(app);
 
 // Laden der Fortschritte für Checkboxen im Spätdienst
 function loadProgress() {
-    const progressRef = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
+    const progressRef = ref(database, 'pflegeformularFrüh/progress'); // Pfad für Fortschritte
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
+            // Checkboxen aktualisieren
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
-                checkbox.checked = progress[checkbox.name] || false;
+                checkbox.checked = progress.checkboxes?.[checkbox.name] || false;
+            });
+
+            // Textinputs aktualisieren
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = progress.textInputs?.[input.name] || '';
             });
         }
     }).catch((error) => {
@@ -34,16 +41,30 @@ function loadProgress() {
     });
 }
 
+
 // Speichern der Fortschritte für Checkboxen
 function saveProgress() {
+    // Fortschritte für Checkboxen erfassen
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const progress = {};
-
+    const checkboxProgress = {};
     checkboxes.forEach(checkbox => {
-        progress[checkbox.name] = checkbox.checked;
+        checkboxProgress[checkbox.name] = checkbox.checked;
     });
 
-    set(ref(database, 'pflegeformularFrüh/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
+    // Fortschritte für Textinputs erfassen
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    const textInputProgress = {};
+    textInputs.forEach(input => {
+        textInputProgress[input.name] = input.value;
+    });
+
+    // Fortschritte in der Datenbank speichern
+    const progress = {
+        checkboxes: checkboxProgress,
+        textInputs: textInputProgress
+    };
+
+    set(ref(database, 'pflegeformularFrüh/progress'), progress)
         .then(() => {
             console.log('Fortschritt erfolgreich gespeichert.');
         })
@@ -52,22 +73,32 @@ function saveProgress() {
         });
 }
 
+
 // Zurücksetzen der Checkboxen Nachtdienst
-function resetCheckboxes() {
+function resetFrühdienst() {
+    // Checkboxen zurücksetzen
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
-    })
-    
-    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
+    });
+
+    // Textinputs zurücksetzen
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    textInputs.forEach(input => {
+        input.value = '';
+    });
+
+    // Fortschritte in der Datenbank zurücksetzen
+    remove(ref(database, 'pflegeformularFrüh/progress'))
         .then(() => {
-            alert('Kontrollkästchen erfolgreich zurückgesetzt!');
+            alert('Kontrollkästchen und Texteingaben erfolgreich zurückgesetzt!');
         })
         .catch((error) => {
-            alert('Fehler beim Zurücksetzen der Kontrollkästchen.');
+            alert('Fehler beim Zurücksetzen der Kontrollkästchen und Texteingaben.');
             console.error(error);
         });
 }
+
 
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
@@ -80,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset-Button
     document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetCheckboxes();
+        resetFrühdienst();
     });
 
     // Speichern der Fortschritte und Text-Inputs (falls nötig)
