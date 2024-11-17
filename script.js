@@ -35,7 +35,41 @@ function saveProgress() {
         });
 }
 
-// Laden der Fortschritte für Checkboxen
+// Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
+function saveProgressFrüh() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const progress = {};
+
+    checkboxes.forEach(checkbox => {
+        progress[checkbox.name] = checkbox.checked;
+    });
+
+    set(ref(database, 'pflegeformularFrüh/checkboxes'), progress) // Fix für korrektes Speichern der Checkbox-Daten
+        .then(() => {
+            console.log('Fortschritt erfolgreich gespeichert.');
+        })
+        .catch((error) => {
+            console.error('Fehler beim Speichern des Fortschritts:', error);
+        });
+}
+// Laden der Fortschritte für Checkboxen im Frühdienst - pflegeformularFrüh
+function loadProgressFrüh() {
+    const progressRef = ref(database, 'pflegeformularFrüh/checkboxes'); // Fix für den richtigen Pfad
+    get(progressRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const progress = snapshot.val();
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = progress[checkbox.name] || false;
+            });
+        }
+    }).catch((error) => {
+        console.error('Fehler beim Laden des Fortschritts:', error);
+    });
+}
+
+// Laden der Fortschritte für Checkboxen im Spätdienst
 function loadProgress() {
     const progressRef = ref(database, 'pflegeformular/checkboxes'); // Fix für den richtigen Pfad
     get(progressRef).then((snapshot) => {
@@ -50,6 +84,22 @@ function loadProgress() {
     }).catch((error) => {
         console.error('Fehler beim Laden des Fortschritts:', error);
     });
+}
+// Zurücksetzen der Checkboxen und Textinputs im Frühdienst
+function resetCheckboxesFrüh() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
+    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
+        .then(() => {
+            alert('Kontrollkästchen im Frühdienst erfolgreich zurückgesetzt!');
+        })
+        .catch((error) => {
+            alert('Fehler beim Zurücksetzen der Kontrollkästchen im Frühdienst.');
+            console.error(error);
+        });
 }
 
 // Zurücksetzen der Checkboxen
@@ -69,8 +119,8 @@ function resetCheckboxes() {
         });
 }
 
-// Text-Inputs speichern
-function saveTextInputs() {
+// Text-Inputs speichern im Frühdienst
+function saveTextInputsFrüh() {
     const textInputs = document.querySelectorAll('input[type="text"]');
     const inputData = {};
 
@@ -78,7 +128,7 @@ function saveTextInputs() {
         inputData[input.name] = input.value;
     });
 
-    set(ref(database, 'pflegeformular/textInputs'), inputData) // Fix für den richtigen Pfad
+    set(ref(database, 'pflegeformularFrüh/textInputs'), inputData) // Fix für den richtigen Pfad
         .then(() => {
             console.log('Text-Inputs erfolgreich gespeichert.');
         })
@@ -87,9 +137,9 @@ function saveTextInputs() {
         });
 }
 
-// Text-Inputs laden
-function loadTextInputs() {
-    const textInputsRef = ref(database, 'pflegeformular/textInputs');
+// Text-Inputs laden im Frühdienst
+function loadTextInputsFrüh() {
+    const textInputsRef = ref(database, 'pflegeformularFrüh/textInputs');
     get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
             const inputData = snapshot.val();
@@ -104,14 +154,14 @@ function loadTextInputs() {
     });
 }
 
-// Zurücksetzen der Text-Inputs
-function resetTextInputs() {
+// Zurücksetzen der Text-Inputs im Frühdienst
+function resetTextInputsFrüh() {
     const textInputs = document.querySelectorAll('input[type="text"]');
     textInputs.forEach(input => {
         input.value = '';
     });
 
-    remove(ref(database, 'pflegeformular/textInputs'))
+    remove(ref(database, 'pflegeformularFrüh/textInputs'))
         .then(() => {
             alert('Text-Inputs erfolgreich zurückgesetzt!');
         })
@@ -124,24 +174,31 @@ function resetTextInputs() {
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     loadProgress();  // Checkboxen laden
-    loadTextInputs();  // Text-Inputs laden
+    loadProgressFrüh() // Checkboxen Frühdienst laden
+    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
 
     // Text-Inputs speichern, wenn der Benutzer tippt
     document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('input', saveTextInputs);
+        input.addEventListener('input', saveTextInputsFrüh);
     });
 
     // Checkboxen speichern, wenn sie geändert werden
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
+        checkbox.addEventListener('change', saveProgressFrüh);
     });
 
     // Reset-Button
     document.getElementById('resetBtn').addEventListener('click', () => {
         resetCheckboxes();
-        resetTextInputs();
     });
 
+    // RESET BUTTON FRÜHDIENST
+    document.getElementById('resetBtnFrüh').addEventListener('click', () => {
+        resetCheckboxesFrüh();
+        resetTextInputsFrüh();
+    });
+    
     // Speichern der Fortschritte und Text-Inputs (falls nötig)
     document.getElementById('saveBtn').addEventListener('click', () => {
         saveProgress();
