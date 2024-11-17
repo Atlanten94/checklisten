@@ -20,7 +20,7 @@ const database = getDatabase(app);
 
     // Speichern der Fortschritte für Checkboxen
 function saveProgress() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
     const progress = {};
 
     checkboxes.forEach(checkbox => {
@@ -42,7 +42,7 @@ function loadProgress() {
     get(progressRef).then((snapshot) => {
         if (snapshot.exists()) {
             const progress = snapshot.val();
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
 
             checkboxes.forEach(checkbox => {
                 checkbox.checked = progress[checkbox.name] || false;
@@ -55,7 +55,7 @@ function loadProgress() {
 
 // Zurücksetzen der Checkboxen Nachtdienst
 function resetCheckboxes() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"].nacht');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
@@ -70,29 +70,29 @@ function resetCheckboxes() {
         });
 }
 
-// DOMContentLoaded Event für Initialisierung Frühdienst
+// DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
-    loadProgressFrüh() // Checkboxen Frühdienst laden
-    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
-
-    // Text-Inputs speichern, wenn der Benutzer tippt
-    document.querySelectorAll('input[type="text"]').forEach(input => {
-        input.addEventListener('input', saveTextInputsFrüh);
-    });
-     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgressFrüh);
-    });
+    loadProgress();  // Checkboxen laden
     
-// Reset-Button
-    document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetCheckboxesFr();
-    });
+    // Checkboxen speichern, wenn sie geändert werden
+    document.querySelectorAll('input[type="checkbox"].nacht').forEach(checkbox => {
+        checkbox.addEventListener('change', saveProgress);
     });
 
+    // Reset-Button
+    document.getElementById('resetBtn').addEventListener('click', () => {
+        resetCheckboxes();
+    });
+
+    // Speichern der Fortschritte und Text-Inputs (falls nötig)
+    document.getElementById('saveBtn').addEventListener('click', () => {
+        saveProgress();
+    });
+});
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
-    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"].früh');
     const progressFrüh = {};
 
     checkboxesFrüh.forEach(checkbox => {
@@ -113,7 +113,7 @@ function loadProgressFrüh() {
     get(progressRefFrüh).then((snapshot) => {
         if (snapshot.exists()) {
             const progressFrüh = snapshot.val();
-            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
+            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"].früh');
 
             checkboxesFrüh.forEach(checkbox => {
                 checkbox.checked = progressFrüh[checkbox.name] || false;
@@ -126,12 +126,12 @@ function loadProgressFrüh() {
 
 //Frühdienst zurücksetzen______________________________________________________
 function resetCheckboxesFr() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"].früh');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
     });
 
-    const textInputs = document.querySelectorAll('input[type="text"]');
+    const textInputs = document.querySelectorAll('input[type="text"].früh');
     textInputs.forEach(input => {
         input.value = '';  // Zurücksetzen der Text-Inputs im DOM
     });
@@ -152,7 +152,7 @@ function resetCheckboxesFr() {
 
 // Text-Inputs speichern im Frühdienst
 function saveTextInputsFrüh() {
-    const textInputs = document.querySelectorAll('input[type="text"]');
+    const textInputs = document.querySelectorAll('input[type="text"].früh');
     const inputData = {};
 
     textInputs.forEach(input => {
@@ -174,7 +174,7 @@ function loadTextInputsFrüh() {
     get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
             const inputData = snapshot.val();
-            const textInputs = document.querySelectorAll('input[type="text"]');
+            const textInputs = document.querySelectorAll('input[type="text"].früh');
 
             textInputs.forEach(input => {
                 input.value = inputData[input.name] || '';
@@ -185,25 +185,25 @@ function loadTextInputsFrüh() {
     });
 }
 
-// DOMContentLoaded Event für Initialisierung
+// DOMContentLoaded Event für Initialisierung Frühdienst
 document.addEventListener('DOMContentLoaded', () => {
-    loadProgress();  // Checkboxen laden
+    loadProgressFrüh() // Checkboxen Frühdienst laden
+    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
+
+    // Text-Inputs speichern, wenn der Benutzer tippt
+    document.querySelectorAll('input[type="text"].früh').forEach(input => {
+        input.addEventListener('input', saveTextInputsFrüh);
+    });
+     document.querySelectorAll('input[type="checkbox"].früh').forEach(checkbox => {
+        checkbox.addEventListener('change', saveProgressFrüh);
+    });
     
-    // Checkboxen speichern, wenn sie geändert werden
-    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', saveProgress);
+// Reset-Button
+    document.getElementById('resetBtnFr').addEventListener('click', () => {
+        resetCheckboxesFr();
+    });
     });
 
-    // Reset-Button
-    document.getElementById('resetBtn').addEventListener('click', () => {
-        resetCheckboxes();
-    });
-
-    // Speichern der Fortschritte und Text-Inputs (falls nötig)
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        saveProgress();
-    });
-});
 
 
     
