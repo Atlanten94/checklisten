@@ -24,17 +24,19 @@ function loadProgress() {
         if (snapshot.exists()) {
             const progress = snapshot.val();
 
+             // Textinputs aktualisieren
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = progress.textInputs?.[input.name] || '';
+            });
+            
             // Checkboxen aktualisieren
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = progress.checkboxes?.[checkbox.name] || false;
             });
 
-            // Textinputs aktualisieren
-            const textInputs = document.querySelectorAll('input[type="text"]');
-            textInputs.forEach(input => {
-                input.value = progress.textInputs?.[input.name] || '';
-            });
+           
         }
     }).catch((error) => {
         console.error('Fehler beim Laden des Fortschritts:', error);
@@ -44,18 +46,18 @@ function loadProgress() {
 
 // Speichern der Fortschritte für Checkboxen
 function saveProgress() {
-    // Fortschritte für Checkboxen erfassen
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const checkboxProgress = {};
-    checkboxes.forEach(checkbox => {
-        checkboxProgress[checkbox.name] = checkbox.checked;
-    });
-
     // Fortschritte für Textinputs erfassen
     const textInputs = document.querySelectorAll('input[type="text"]');
     const textInputProgress = {};
     textInputs.forEach(input => {
         textInputProgress[input.name] = input.value;
+    });
+    
+    // Fortschritte für Checkboxen erfassen
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const checkboxProgress = {};
+    checkboxes.forEach(checkbox => {
+        checkboxProgress[checkbox.name] = checkbox.checked;
     });
 
     // Fortschritte in der Datenbank speichern
@@ -76,16 +78,17 @@ function saveProgress() {
 
 // Zurücksetzen der Checkboxen Nachtdienst
 function resetFrühdienst() {
-    // Checkboxen zurücksetzen
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
-    });
 
     // Textinputs zurücksetzen
     const textInputs = document.querySelectorAll('input[type="text"]');
     textInputs.forEach(input => {
         input.value = '';
+    });
+    
+    // Checkboxen zurücksetzen
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
     });
 
     // Fortschritte in der Datenbank zurücksetzen
@@ -108,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', saveProgress);
     });
+
     document.querySelectorAll('input[type="text"]').forEach(textInput => {
     textInput.addEventListener('input', saveProgress); // Bei Texteingabe speichern
     });
