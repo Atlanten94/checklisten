@@ -55,6 +55,7 @@ checkboxes.forEach(checkbox => {
     checkbox.checked = false;
 });
 
+
 remove(ref(database, 'pflegeformular'))
     .then(() => {
     alert('Kontrollkästchen erfolgreich zurückgesetzt!');
@@ -64,30 +65,6 @@ remove(ref(database, 'pflegeformular'))
     console.error(error);
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-loadProgress();
-loadTextInputs();
-    
-document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', saveProgress);
-});
-
-document.querySelectorAll('input[type="text"]').forEach(input => {
-    input.addEventListener('input', saveTextInputs);
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-    resetCheckboxes();
-    resetTextInputs();
-    });
-
-document.getElementById('saveBtn').addEventListener('click', () => {
-    saveProgress();
-    saveTextInputs();
-    });
-
-});
 
 //_______________ T E X T   I N P U T S ____________________
 // Text-Inputs speichern
@@ -141,3 +118,27 @@ function resetTextInputs() {
         console.error(error);
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+loadProgress();
+loadTextInputs();
+    
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', saveProgress);
+});
+
+document.querySelectorAll('input[type="text"]').forEach(input => {
+    input.addEventListener('input', saveTextInputs);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+    resetCheckboxes();
+    resetTextInputs();
+    });
+
+document.getElementById('saveBtn').addEventListener('click', () => {
+    saveProgress();
+    saveTextInputs();
+    });
+
+});
