@@ -1,23 +1,20 @@
-import { checkAuthentication, logout, database, ref, set, get } from './auth.js';
+import { auth } from './auth.js';
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Authentifizierung prüfen
-    checkAuthentication();
+// Login
+document.getElementById('loginForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    // Beispiel: Daten aus der Datenbank laden
-    const dataRef = ref(database, 'pflegeformularFrüh/progress');
-    get(dataRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                console.log('Daten geladen:', snapshot.val());
-            } else {
-                console.log('Keine Daten gefunden.');
-            }
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            console.log('Eingeloggt:', userCredential.user);
+            window.location.href = "dashboard.html";
         })
         .catch((error) => {
-            console.error('Fehler beim Laden der Daten:', error);
+            console.error('Login fehlgeschlagen:', error.message);
+            alert('Login fehlgeschlagen: ' + error.message);
         });
-
-    // Logout-Button
-    document.getElementById('logoutBtn').addEventListener('click', logout);
 });
+
