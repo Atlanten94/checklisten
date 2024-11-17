@@ -32,15 +32,18 @@ export function checkAuthentication() {
 
 // Logout-Funktion
 export function logout() {
+   alert('Logout-Prozess gestartet.'); // Debugging
     signOut(auth)
         .then(() => {
             console.log('Erfolgreich ausgeloggt.');
-            window.location.href = "login.html";
+            window.location.href = "login.html"; // Weiterleitung zur Login-Seite
         })
         .catch((error) => {
-            console.error('Fehler beim Logout:', error.message);
+            console.error('Fehler beim Logout:', error.message); // Detaillierte Fehlerausgabe
+            alert('Logout fehlgeschlagen. Bitte versuchen Sie es erneut.'); // Benutzerfreundliche Fehlermeldung
         });
 }
+
 
 // Exporte für die Verwendung in anderen Dateien
 export { app, auth, database, ref, set, get, remove };
