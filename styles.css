@@ -702,7 +702,19 @@ flex-shrink: 0;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+.logout-button:hover{
+     box-shadow:2px 2px 5px black;
+}
 
+.logout-button:active{
+     box-shadow:2px 2px 5px black inset;
+}
+
+.reset-button:hover{
+     box-shadow:2px 2px 5px black;}
+.reset-button:active{
+     box-shadow:2px 2px 5px black inset;
+}
 .reset-button{
     width:60%;
     padding: 10px 10px;
