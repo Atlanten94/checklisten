@@ -154,6 +154,15 @@ function loadTextInputsFrüh() {
     });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    loadProgressFrüh() // Checkboxen Frühdienst laden
+    loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
+// Reset-Button
+    document.getElementById('resetBtnFr').addEventListener('click', () => {
+        resetCheckboxesFr();
+    });
+});
+
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     loadProgress();  // Checkboxen laden
@@ -176,11 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resetCheckboxes();
     });
 
-    // Reset-Button
-    document.getElementById('resetBtnFr').addEventListener('click', () => {
-        resetCheckboxesFr();
-    });
-    
     // Speichern der Fortschritte und Text-Inputs (falls nötig)
     document.getElementById('saveBtn').addEventListener('click', () => {
         saveProgress();
