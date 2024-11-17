@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Speichern Fortschritt von Frühdienst -- pflegeformularFrüh
 function saveProgressFrüh() {
-    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"].früh');
+    const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
     const progressFrüh = {};
 
     checkboxesFrüh.forEach(checkbox => {
@@ -113,7 +113,7 @@ function loadProgressFrüh() {
     get(progressRefFrüh).then((snapshot) => {
         if (snapshot.exists()) {
             const progressFrüh = snapshot.val();
-            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"].früh');
+            const checkboxesFrüh = document.querySelectorAll('input[type="checkbox"]');
 
             checkboxesFrüh.forEach(checkbox => {
                 checkbox.checked = progressFrüh[checkbox.name] || false;
@@ -126,12 +126,12 @@ function loadProgressFrüh() {
 
 //Frühdienst zurücksetzen______________________________________________________
 function resetCheckboxesFr() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"].früh');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;  // Zurücksetzen der Checkboxen im DOM
     });
 
-    const textInputs = document.querySelectorAll('input[type="text"].früh');
+    const textInputs = document.querySelectorAll('input[type="text"]');
     textInputs.forEach(input => {
         input.value = '';  // Zurücksetzen der Text-Inputs im DOM
     });
@@ -152,7 +152,7 @@ function resetCheckboxesFr() {
 
 // Text-Inputs speichern im Frühdienst
 function saveTextInputsFrüh() {
-    const textInputs = document.querySelectorAll('input[type="text"].früh');
+    const textInputs = document.querySelectorAll('input[type="text"]');
     const inputData = {};
 
     textInputs.forEach(input => {
@@ -174,7 +174,7 @@ function loadTextInputsFrüh() {
     get(textInputsRef).then((snapshot) => {
         if (snapshot.exists()) {
             const inputData = snapshot.val();
-            const textInputs = document.querySelectorAll('input[type="text"].früh');
+            const textInputs = document.querySelectorAll('input[type="text"]');
 
             textInputs.forEach(input => {
                 input.value = inputData[input.name] || '';
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTextInputsFrüh();  // Text-Inputs Frühdienstladen
 
     // Text-Inputs speichern, wenn der Benutzer tippt
-    document.querySelectorAll('input[type="text"].früh').forEach(input => {
+    document.querySelectorAll('input[type="text"]').forEach(input => {
         input.addEventListener('input', saveTextInputsFrüh);
     });
      document.querySelectorAll('input[type="checkbox"].früh').forEach(checkbox => {
