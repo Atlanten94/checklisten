@@ -86,14 +86,13 @@ function loadProgress() {
     });
 }
 
-// Zurücksetzen der Checkboxen
-function resetCheckboxes() {
+function resetCheckboxesFr() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
     
-    remove(ref(database, 'pflegeformular/checkboxes'))
+    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
         })
@@ -103,13 +102,14 @@ function resetCheckboxes() {
         });
 }
 
-function resetCheckboxesFr() {
+// Zurücksetzen der Checkboxen
+function resetCheckboxes() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         checkbox.checked = false;
     })
     
-    remove(ref(database, 'pflegeformularFrüh/checkboxes'))
+    remove(ref(database, 'pflegeformular/checkboxes'))
         .then(() => {
             alert('Kontrollkästchen erfolgreich zurückgesetzt!');
         })
