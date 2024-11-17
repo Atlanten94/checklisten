@@ -4,6 +4,86 @@ body {
     background-color: #bffff9;
 }
 
+/*-------------------L O G I N P A G E -----------------------------------------*/
+.login-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Vollständige Höhe des Viewports */
+    margin: 0;
+}
+
+.loginContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.user-inputs{
+margin-bottom:15px;
+}
+.hidden {
+    display: none;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.user-login-input {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    font-size: larger;
+    margin:10px 20px 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.user-login-button {
+    width: 60%;
+    padding: 10px 10px;
+    margin-top:5px;
+    background-color: #007bff;
+    font-size: large;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*box-shadow: offset-x offset-y blur-radius spread-radius color inset;*/
+
+#forgot-password-button{
+    background-color: transparent;
+    color: black;
+    border: solid black 1px;
+}
+
+#forgot-password-button:hover{
+    box-shadow:2px 2px 5px black;
+}
+.user-login-button:hover {
+    background-color: #007bff;
+    box-shadow:2px 2px 5px black;
+}
+
+.user-login-button:active{
+    box-shadow:2px 2px 5px black inset;
+}
+#forgot-password-button:active{
+    box-shadow:2px 2px 5px black inset;
+}
+
+#message {
+    margin-top: 10px;
+}
+
 /*--------new Button------------*/
 .KKD{
 justify-self:flex-end;
