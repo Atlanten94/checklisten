@@ -75,6 +75,7 @@ function resetFrühdienst() {
         });
 }
 
+//--------------------------- L O G O U T -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout-button');
 
@@ -86,6 +87,54 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Logout-Button gefunden. Event-Listener wird hinzugefügt.');
     logoutButton.addEventListener('click', () => {
         logout(); // Ruft die Logout-Funktion auf
+    });
+});
+
+
+//--------------------------- P A S S W O R T    Ä N D E R N _----------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const changePasswordButton = document.getElementById('change-password-button');
+
+    // Sicherstellen, dass der Button existiert
+    if (!changePasswordButton) {
+        console.error('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
+        return; // Falls Button nicht existiert, stoppen
+    }
+
+    console.log('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
+
+    // Event-Listener für Button hinzufügen
+    changePasswordButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Standard-Button-Verhalten verhindern
+
+        // Neues Passwort aus dem Eingabefeld abrufen
+        const newPassword = document.getElementById('new-password')?.value;
+
+        if (!newPassword) {
+            console.error('Neues Passwort ist leer!');
+            alert('Bitte geben Sie ein neues Passwort ein.');
+            return;
+        }
+
+        console.log('Neues Passwort eingegeben. Änderungsprozess wird gestartet.');
+
+        // Passwortänderungslogik
+        const user = auth.currentUser;
+
+        if (user) {
+            updatePassword(user, newPassword)
+                .then(() => {
+                    alert('Passwort erfolgreich geändert!');
+                    console.log('Passwort wurde aktualisiert.');
+                })
+                .catch((error) => {
+                    console.error('Fehler beim Ändern des Passworts:', error.message);
+                    alert(`Fehler: ${error.message}`);
+                });
+        } else {
+            alert('Benutzer nicht eingeloggt. Bitte melden Sie sich erneut an.');
+            console.error('Kein Benutzer gefunden. Passwortänderung abgebrochen.');
+        }
     });
 });
 
