@@ -75,6 +75,22 @@ function resetFrühdienst() {
         });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    alert('DOM vollständig geladen.'); // Debugging
+    const logoutButton = document.getElementById('logout-button');
+
+    if (!logoutButton) {
+        console.error('Logout-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
+        return; // Beenden, wenn der Button nicht existiert
+    }
+
+    console.log('Logout-Button gefunden. Event-Listener wird hinzugefügt.');
+    logoutButton.addEventListener('click', () => {
+        alert('Logout-Button geklickt.'); // Debugging
+        logout(); // Ruft die Logout-Funktion auf
+    });
+});
+
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
     checkAuthentication(); // Authentifizierung prüfen
@@ -95,11 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Speichern-Button
     document.getElementById('saveBtn').addEventListener('click', saveProgress);
-
-     document.getElementById('logout-button').addEventListener('click', () => {
-    alert('Logout-Button funktioniert.'); // Debugging
-    logout();
-});
 
 });
 
