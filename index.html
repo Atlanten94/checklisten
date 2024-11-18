@@ -12,6 +12,16 @@
  <script type="module" src="auth.js"></script>       
 </head>
 <body class="Dashboard">
+
+    <div class="loginContainer hidden" id="password-change-container">
+        <h2>Passwort ändern</h2>
+        <form id="change-password-form">
+            <label for="new-password">Neues Passwort</label>
+            <input class="user-login-input" type="password" id="new-password" placeholder="Neues Passwort" required>
+            <button class="user-login-button" id="change-password-button" type="submit">Passwort ändern</button>
+        </form>
+    </div>
+    
     <div id="title">
         <h1 class="index-headline">Komm klar digga!</h1>
         <h2 class="index-head">Hak's ab!</h2>
