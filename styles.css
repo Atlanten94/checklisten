@@ -10,6 +10,14 @@ body {
     justify-content: center;
 }
 
+.footer-form-container{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 5% 20px 5%;
+    border: none;
+    border-radius: 10px;
+    background-color: none;
+}
 /*-------------------L O G I N P A G E -----------------------------------------*/
 .login-body{
     display: flex;
