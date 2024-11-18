@@ -1,5 +1,6 @@
 import { checkAuthentication, database, ref, set, get, remove } from './auth.js';
 import { logout } from './auth.js';
+import { updatePassword } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
 // Laden der Fortschritte für Checkboxen und Textinputs
 function loadProgress() {
