@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //--------------------------- P A S S W O R T    Ä N D E R N _----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    const changePasswordButton = document.getElementById('change-password-button');
+    const changePasswordButton = document.getElementById('password-change-button');
 
     if (!changePasswordButton) {
         alert('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
