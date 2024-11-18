@@ -95,28 +95,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //--------------------------- P A S S W O R T    Ä N D E R N _----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    const changePasswordButton = document.getElementById('password-change-button');
+    const togglePasswordChangeButton = document.getElementById('toggle-password-change-button');
     const passwordChangeContainer = document.getElementById('password-change-container');
+    const submitChangePasswordButton = document.getElementById('password-change-button');
+
+    if (!togglePasswordChangeButton) {
+        console.error('Button zum Anzeigen der Passwort-Änderungs-Form nicht gefunden! Überprüfen Sie die ID im HTML.');
+        return;
+    }
 
     if (!passwordChangeContainer) {
         console.error('Passwort-Änderungs-Container nicht gefunden! Überprüfen Sie die ID im HTML.');
         return;
     }
 
-    // Sicherstellen, dass die Form sichtbar ist
-    if (passwordChangeContainer.classList.contains('hidden')) {
-        console.log('Passwort-Änderungs-Container wird sichtbar gemacht.');
-        passwordChangeContainer.classList.remove('hidden');
-    }
+    // Event-Listener, um die Form sichtbar zu machen
+    togglePasswordChangeButton.addEventListener('click', () => {
+        if (passwordChangeContainer.classList.contains('hidden')) {
+            console.log('Passwort-Änderungs-Container wird sichtbar gemacht.');
+            passwordChangeContainer.classList.remove('hidden');
+        } else {
+            console.log('Passwort-Änderungs-Container wird ausgeblendet.');
+            passwordChangeContainer.classList.add('hidden');
+        }
+    });
 
-    if (!changePasswordButton) {
+    if (!submitChangePasswordButton) {
         console.error('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
         return;
     }
 
     console.log('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
 
-    changePasswordButton.addEventListener('click', (e) => {
+    // Event-Listener für die Passwort-Änderung
+    submitChangePasswordButton.addEventListener('click', (e) => {
         e.preventDefault();
 
         const newPassword = document.getElementById('new-password')?.value;
@@ -149,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 
 
 
