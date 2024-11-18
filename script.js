@@ -96,13 +96,25 @@ document.addEventListener('DOMContentLoaded', () => {
 //--------------------------- P A S S W O R T    Ä N D E R N _----------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const changePasswordButton = document.getElementById('password-change-button');
+    const passwordChangeContainer = document.getElementById('password-change-container');
 
-    if (!changePasswordButton) {
-        alert('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
+    if (!passwordChangeContainer) {
+        console.error('Passwort-Änderungs-Container nicht gefunden! Überprüfen Sie die ID im HTML.');
         return;
     }
 
-    alert('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
+    // Sicherstellen, dass die Form sichtbar ist
+    if (passwordChangeContainer.classList.contains('hidden')) {
+        console.log('Passwort-Änderungs-Container wird sichtbar gemacht.');
+        passwordChangeContainer.classList.remove('hidden');
+    }
+
+    if (!changePasswordButton) {
+        console.error('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
+        return;
+    }
+
+    console.log('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
 
     changePasswordButton.addEventListener('click', (e) => {
         e.preventDefault();
@@ -116,7 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Neues Passwort eingegeben. Änderungsprozess wird gestartet.');
 
-        // Benutzer abrufen
         const user = auth.currentUser;
 
         if (user) {
@@ -134,11 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
         } else {
-            console.error('Kein Benutzer angemeldet.');
             alert('Kein Benutzer angemeldet. Bitte melden Sie sich erneut an.');
         }
     });
 });
+
 
 
 // DOMContentLoaded Event für Initialisierung
