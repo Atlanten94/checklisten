@@ -731,6 +731,27 @@ flex-shrink: 0;
     background-color:transparent;
 }
 
+.password-change-button:hover{
+    box-shadow:2px 2px 5px black;
+background-color: #007bff;
+}
+
+.password-change-button:active{
+    box-shadow:2px 2px 5px black inset;
+   background-color: #007bff;
+}
+.password-change-button{
+   width:60%;
+   padding: 10px 10px;
+   margin-top:5px;
+   background-color: #007bff;
+   border: none;
+   border-radius: 20px;
+   color: white;
+   cursor:pointer;
+   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 .reset-button:hover{
      box-shadow:2px 2px 5px black;
 background-color: #007bff;
