@@ -97,48 +97,49 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const changePasswordButton = document.getElementById('change-password-button');
 
-    // Sicherstellen, dass der Button existiert
     if (!changePasswordButton) {
         alert('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
-        return; // Falls Button nicht existiert, stoppen
+        return;
     }
 
     alert('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
 
-    // Event-Listener für Button hinzufügen
     changePasswordButton.addEventListener('click', (e) => {
-        e.preventDefault(); // Standard-Button-Verhalten verhindern
+        e.preventDefault();
 
-        // Neues Passwort aus dem Eingabefeld abrufen
         const newPassword = document.getElementById('new-password')?.value;
 
         if (!newPassword) {
-            console.error('Neues Passwort ist leer!');
             alert('Bitte geben Sie ein neues Passwort ein.');
             return;
         }
 
         console.log('Neues Passwort eingegeben. Änderungsprozess wird gestartet.');
 
-        // Passwortänderungslogik
+        // Benutzer abrufen
         const user = auth.currentUser;
 
         if (user) {
             updatePassword(user, newPassword)
                 .then(() => {
                     alert('Passwort erfolgreich geändert!');
-                    console.log('Passwort wurde aktualisiert.');
+                    console.log('Passwort wurde erfolgreich geändert.');
                 })
                 .catch((error) => {
                     console.error('Fehler beim Ändern des Passworts:', error.message);
-                    alert(`Fehler: ${error.message}`);
+                    if (error.code === 'auth/requires-recent-login') {
+                        alert('Ihre Sitzung ist abgelaufen. Bitte loggen Sie sich erneut ein.');
+                    } else {
+                        alert(`Fehler: ${error.message}`);
+                    }
                 });
         } else {
-            alert('Benutzer nicht eingeloggt. Bitte melden Sie sich erneut an.');
-            console.error('Kein Benutzer gefunden. Passwortänderung abgebrochen.');
+            console.error('Kein Benutzer angemeldet.');
+            alert('Kein Benutzer angemeldet. Bitte melden Sie sich erneut an.');
         }
     });
 });
+
 
 // DOMContentLoaded Event für Initialisierung
 document.addEventListener('DOMContentLoaded', () => {
