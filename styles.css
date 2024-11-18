@@ -753,7 +753,7 @@ background-color: #007bff;
 .aufgaben-Frühdienst {
     display: flex;
     flex-direction: column; /* Ensures tasks are stacked vertically */
-    gap: 10px; /* Adds spacing between tasks */
+    gap: 0; /* Adds spacing between tasks */
     margin: 0;
     padding: 0;
 }
@@ -762,17 +762,19 @@ background-color: #007bff;
     display: flex;
     justify-content: space-between; /* Aligns time and description */
     align-items: center; /* Centers items vertically */
-    padding: 5px 0;
+    padding: 0;
 }
 
 .zeit {
     flex-basis: 30%; /* Ensures a consistent width for the time column */
     text-align: left;
+    margin:0;
 }
 
 .beschreibung {
     flex-basis: 70%; /* Remaining space for the description */
     text-align: left;
+    margin:3px;
 }
 
 /* Responsive Design for Smartphones */
@@ -780,11 +782,12 @@ background-color: #007bff;
     .aufgaben-item {
         flex-direction: column; /* Stacks time and description on smaller screens */
         align-items: flex-start;
+        gap:2px;
     }
 
     .zeit, .beschreibung {
         flex-basis: 100%;
-        margin: 0 0 5px 0; /* Adds spacing between stacked elements */
+        margin: 0; /* Adds spacing between stacked elements */
     }
 }
 
