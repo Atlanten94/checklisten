@@ -1,3 +1,23 @@
+import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-messaging.js";
+
+const messaging = getMessaging();
+
+// Hier den öffentlichen VAPID-Schlüssel einfügen
+const vapidKey = "v6rGuReTu7izhd0mpaH7-K9-CUdsvzfZlDlrjhF-tP4";
+
+// Token abrufen
+getToken(messaging, { vapidKey })
+    .then((currentToken) => {
+        if (currentToken) {
+            console.log('Token erhalten:', currentToken);
+            // Token in deiner Datenbank speichern
+        } else {
+            console.warn('Keine Benachrichtigungsberechtigung erteilt.');
+        }
+    }).catch((error) => {
+        console.error('Fehler beim Abrufen des Tokens:', error);
+    });
+
 document.addEventListener('DOMContentLoaded', function() {
     var today = new Date();
     var dayOfWeek = today.getDay(); // 0 = Sonntag, 1 = Montag, ..., 6 = Samstag
