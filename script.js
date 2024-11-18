@@ -76,7 +76,6 @@ function resetFrühdienst() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    alert('DOM vollständig geladen.'); // Debugging
     const logoutButton = document.getElementById('logout-button');
 
     if (!logoutButton) {
@@ -86,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Logout-Button gefunden. Event-Listener wird hinzugefügt.');
     logoutButton.addEventListener('click', () => {
-        alert('Logout-Button geklickt.'); // Debugging
         logout(); // Ruft die Logout-Funktion auf
     });
 });
