@@ -147,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(() => {
                     alert('Passwort erfolgreich geändert!');
                     console.log('Passwort wurde erfolgreich geändert.');
+                    console.log('Passwort-Änderungs-Container wird ausgeblendet.');
+                    passwordChangeContainer.classList.add('hidden');
                 })
                 .catch((error) => {
                     console.error('Fehler beim Ändern des Passworts:', error.message);
