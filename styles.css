@@ -4,6 +4,12 @@ body {
     background-color: #bffff9;
 }
 
+#footer-button-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*-------------------L O G I N P A G E -----------------------------------------*/
 .login-body{
     display: flex;
