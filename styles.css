@@ -191,13 +191,18 @@ input[type="checkbox"] {
 /*Dashboard**********************************************************************************************/
 #title{
     width:100%;
-    min-width:1400px;
     text-align: center;
     height:auto;
     opacity: 0; /* Anfangs unsichtbar */
     animation: fadeIn 1s ease-out forwards; /* Einblende-Animation */
     animation-delay: 1s; /* Verzögerung für das Einblenden */
     background-color: transparent;
+}
+
+@media (min-width: 1200px) {
+    #title, .container {
+        min-width: 1400px;
+    }
 }
 
 .index-headline
