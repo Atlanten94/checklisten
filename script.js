@@ -98,11 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sicherstellen, dass der Button existiert
     if (!changePasswordButton) {
-        console.error('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
+        alert('Passwort-Änderungs-Button nicht gefunden! Überprüfen Sie die ID im HTML.');
         return; // Falls Button nicht existiert, stoppen
     }
 
-    console.log('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
+    alert('Passwort-Änderungs-Button gefunden. Event-Listener wird hinzugefügt.');
 
     // Event-Listener für Button hinzufügen
     changePasswordButton.addEventListener('click', (e) => {
