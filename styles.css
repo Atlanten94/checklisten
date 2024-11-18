@@ -791,13 +791,13 @@ background-color: #007bff;
 .zeit {
     flex-basis: 30%; /* Ensures a consistent width for the time column */
     text-align: left;
-    margin:0;
+    margin:3px;
 }
 
 .beschreibung {
     flex-basis: 70%; /* Remaining space for the description */
     text-align: left;
-    margin:3px;
+    margin:0;
 }
 
 /* Responsive Design for Smartphones */
