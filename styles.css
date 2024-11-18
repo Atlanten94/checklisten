@@ -792,7 +792,7 @@ background-color: #007bff;
 
     .zeit, .beschreibung {
         flex-basis: 100%;
-        margin: 0; /* Adds spacing between stacked elements */
+        margin: 3px; /* Adds spacing between stacked elements */
     }
 }
 
