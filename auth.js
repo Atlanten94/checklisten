@@ -24,7 +24,6 @@ const database = getDatabase(app);
 export function checkAuthentication() {
     onAuthStateChanged(auth, (user) => {
         if (!user) {
-            alert('Bitte loggen Sie sich ein.');
             window.location.href = "login.html";
         }
     });
