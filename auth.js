@@ -31,7 +31,6 @@ export function checkAuthentication() {
 
 // Logout-Funktion
 export function logout() {
-   alert('Logout-Prozess gestartet.'); // Debugging
     signOut(auth)
         .then(() => {
             console.log('Erfolgreich ausgeloggt.');
